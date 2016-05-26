@@ -1,0 +1,174 @@
+#include<stdio.h>
+#include<stdlib.h>
+#include<math.h>
+#include<string.h>
+#include<sac.h>
+#include<sacio.h>
+#include<ASU_tools.h>
+
+#define DMAXL 2000000
+
+/*******************************************************************************************
+ * This C function use sac libaries to load data into RAM for
+ * further use.
+ *
+ * double **data        ----  An 2D array to store read in data.
+ * int    nptsx         ----  X dimension of data. ( trace number )
+ * int    nptsy         ----  Y dimension of data. ( trace NPTS, need to be pre-calculated )
+ * double *CutAround    ----  Cut around this time value. e.g. a phase arrival ( sec. )
+ * double Cut           ----  Begin time in result relative to CutAround. ( sec. )
+ *                            Cut < 0 means cut before CutAround.
+ *                            If Cut window is not covered by data length, notify as bad.
+ * double delta         ----  Interpolate / Decimate to this sampling rate. ( sec. )
+ *                            Data length (in sec.) is (nptsy-1)*delta.
+ * double f1            ----  Filter left corner freq 1.
+ *                            Ignored when flag_filter == 1
+ * double f2            ----  Filter right corner freq 2.
+ *                            Ignored when flag_filter == 3
+ * int    order         ----  Filter order.
+ * int    passes        ----  Pass.
+ * int    flag_filter   ----  Type of filter applied to data.
+ *                            0 -- No filter.
+ *                            1 -- Butterworth low pass.
+ *                            2 -- Butterworth band pass.
+ *                            3 -- Butterworth high pass.
+ * int    flag_retrend  ----  After the cut, whether apply a retrend operation.
+ * 							  0 -- No retrend after cut.
+ * 							  1 -- Retrend after cut.
+ * double taperwidth    ----  After the cut, apply a taper before filter.
+ * char   **filelist    ----  Sac file list ( use absolute dir with file basename )
+ * int    *bad          ----  Indicate this data has error.
+ *
+ * Shule Yu
+ * Oct 01 2014
+ *
+ * Key words: sac, IO, read data.
+*******************************************************************************************/
+
+
+int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,double delta,double f1,double f2,int order, int passes,int flag_filter, int flag_retrend, double taperwidth,char **filelist,int *bad){
+
+    int    nerr,maxl,count,count2,fileN,rawnpts,win_rawbegin,win_rawnpts,interp_flag;
+    float  *rawtime,*rawdata,rawbeg,rawdel;
+    double *rawtimed,*rawdatad,*newtime,CutTime,dlength;
+
+    maxl=DMAXL;
+    dlength=(nptsy-1)*delta;
+
+    // Malloc auxilliary space.
+    rawtime=(float *)malloc(DMAXL*sizeof(float));
+    rawdata=(float *)malloc(DMAXL*sizeof(float));
+    rawtimed=(double *)malloc(DMAXL*sizeof(double));
+    rawdatad=(double *)malloc(DMAXL*sizeof(double));
+    newtime=(double *)malloc(nptsy*sizeof(double));
+
+    // Read in sac files.
+    fileN=0;
+    for (count=0;count<nptsx;count++){
+
+        CutTime=Cut+CutAround[count];
+
+        // Load sac file.
+        // Evenly sampling, use rsac1.
+        rsac1(filelist[count],rawdata,&rawnpts,&rawbeg,&rawdel,&maxl,&nerr,strlen(filelist[count]));
+
+        if (nerr>0){ // uneven sampling, use rsac2.
+            interp_flag=1;
+            rsac2(filelist[count],rawdata,&rawnpts,rawtime,&maxl,&nerr,strlen(filelist[count]));
+        }
+        else{
+            interp_flag=0;
+            for (count2=0;count2<rawnpts;count2++){
+                rawtime[count2]=rawbeg+count2*rawdel;
+            }
+        }
+
+        // Test if it's a bad record.
+        if (nerr>0){
+            printf("In %s: SAC read error for file %s ...\n",__func__,filelist[count]);
+            bad[count]=1;
+            continue;
+        }
+
+		// Check the coverage of cut window.
+		if ( CutTime<rawtime[0] || rawtime[rawnpts-1]<CutTime+dlength ){
+            printf("In %s: Cut window no sutable for file %s ...\n",__func__,filelist[count]);
+            bad[count]=1;
+            continue;
+		}
+
+        // Find the begin and length of cut window on raw record.
+        win_rawnpts=0;
+		win_rawbegin=0;
+        for (count2=0;count2<rawnpts;count2++){
+            if (rawtime[count2] <= CutTime){
+                win_rawbegin=count2;
+            }
+            if ( CutTime <= rawtime[count2] && rawtime[count2] <= CutTime+dlength ){
+                win_rawnpts++;
+            }
+        }
+
+        // Check amplitude within the cut window, to see if it's a bad record.
+        if ( amplitude(rawdata+win_rawbegin,win_rawnpts) < 1e-20 ){
+            printf("In %s: Small amplitude file %s ... \n",__func__,filelist[count]);
+            bad[count]=1;
+            continue;
+        }
+
+        // Interpolate / Decimate and cut data.
+        for (count2=0;count2<rawnpts;count2++){
+            rawtimed[count2]=rawtime[count2];
+            rawdatad[count2]=rawdata[count2];
+        }
+        for (count2=0;count2<nptsy;count2++){
+            newtime[count2]=CutTime+delta*count2;
+        }
+        wiginterpd(rawtimed,rawdatad,rawnpts,newtime,data[count],nptsy,interp_flag);
+
+        // Retrend.
+		if (flag_retrend!=0){
+			retrendd(CutTime,data[count],nptsy,delta);
+		}
+
+        // Filter.
+        if (flag_filter!=0){
+
+            // SAC needs float -_-
+            for (count2=0;count2<nptsy;count2++){
+                rawdata[count2]=data[count][count2];
+            }
+
+            // Taper before filter.
+            taper(rawdata,nptsy,taperwidth);
+
+            // Butterworth filter.
+            if (flag_filter==1){
+                xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_LOWPASS,f1,f2,delta,passes);
+            }
+            if (flag_filter==2){
+                xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_BANDPASS,f1,f2,delta,passes);
+            }
+            if (flag_filter==3){
+                xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_HIGHPASS,f1,f2,delta,passes);
+            }
+
+            // Store data back to double.
+            for (count2=0;count2<nptsy;count2++){
+                data[count][count2]=rawdata[count2];
+            }
+        }
+
+        bad[count]=0;
+        fileN++;
+
+    } // End of reading from filelist.
+
+    free(rawtime);
+    free(rawdata);
+    free(rawtimed);
+    free(rawdatad);
+    free(newtime);
+
+    return fileN;
+}

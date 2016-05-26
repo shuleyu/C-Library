@@ -1,0 +1,301 @@
+
+# Install autoconf-archive
+
+# 0. rename/delete any Makefile
+
+# 1. autoscan
+
+# 2. edit confiugre.scan:
+
+AC_INIT([ASU_tools], [1.0], [ysl6.626@gmail.com])
+AM_INIT_AUTOMAKE
+(right after AC_INIT)
+
+AC_PROG_RANLIB
+
+AC_SEARCH_LIBS([pow],[m],[],[AC_MSG_ERROR([Unable to find library: libmath.a])],[])
+AC_SEARCH_LIBS([fftw_plan_dft_r2c_1d],[fftw3],[],[AC_MSG_ERROR([Unable to find library: libfftw3.a.  Install fftw3 first.])],[-lm])
+AC_SEARCH_LIBS([rsac1],[sacio],[],[AC_MSG_ERROR([Unable to find library: libsacio.a. Try " ./configure LDFLAGS=-L\${SACHOME}/lib CPPFLAGS=-I\${SACHOME}/include "])],[-lm])
+AC_SEARCH_LIBS([envelope],[sac],[],[AC_MSG_ERROR([Unable to find library: libsac.a.  Try " ./configure LDFLAGS=-L\${SACHOME}/lib CPPFLAGS=-I\${SACHOME}/include "])],[-lm])
+
+AC_OUTPUT(Makefile lib/Makefile examples/Makefile include/Makefile)
+
+mv configure.scan configure.ac
+
+# 3. autoheader
+
+# 4. edit Makefile.am:
+
+AUTOMAKE_OPTIONS = foreign
+SUBDIRS = lib examples include
+
+# 5. edit include/Makefile.am
+include_HEADERS = ASU_tools.h
+
+
+# 6. edit lib/Makefile.am:
+
+AM_CFLAGS = -I../include
+lib_LIBRARIES = libASU_tools.a
+
+libASU_tools_a_SOURCES = amplitude.fun.c amplituded.fun.c beta.fun.c binary_search.fun.c bootstrap.fun.c bottom_location.fun.c bottom_location_fp.fun.c cart2sph.fun.c cbin_stack.fun.c cbin_stack_update.fun.c cbin_update.fun.c cc.fun.c cc_limitshift.fun.c cc_positive.fun.c cc_static.fun.c cc_static_energy.fun.c cc_trace.fun.c cmt2tp.fun.c complex_divide.fun.c confidence.fun.c convolve.fun.c ellipcor_kennett.fun.c envelope_hilbert.fun.c filenr.fun.c findjunction.fun.c findrayp.fun.c findrayp_ulvz.fun.c freq_amp_phase.fun.c gaussblur_1d.fun.c gaussian.fun.c gcpdistance.fun.c interp2_linear.fun.c interp3_linear.fun.c legendre.fun.c ll2tp.fun.c max_ampd.fun.c max_vald.fun.c mean.fun.c min_vald.fun.c mollifier.fun.c normalize.fun.c normalize_window.fun.c normalized.fun.c p_norm.fun.c p_norm_err.fun.c permutation.fun.c phase_shift.fun.c pick_onset.fun.c prem.fun.c rad_pat.fun.c rad_pat_loc.fun.c ramp_function.fun.c random_gaussian.fun.c random_int.fun.c random_num.fun.c ray_path.fun.c rayp2takeoff.fun.c read_sac.fun.c retrend.fun.c retrendd.fun.c reverse_array.fun.c shift_array.fun.c shift_stack.fun.c simpsonx.fun.c snr_envelope.fun.c snr_envelope_sac.fun.c sort_quick.fun.c sort_quickd.fun.c sph2cart.fun.c sphdist.fun.c std_errd.fun.c std_weight.fun.c stde.fun.c stded.fun.c student_cdf.fun.c student_icdf.fun.c student_pdf.fun.c taper.fun.c taperd.fun.c tcdf.fun.c tp2ll.fun.c tpangle.fun.c union_sets.fun.c waterlevel_decon.fun.c waterlevel_decon_wl.fun.c waypoint.fun.c waypoint_az.fun.c waypoint_deeppath.fun.c weighted_sum.fun.c wiginterpd.fun.c 
+
+
+# 7. edit exapmles/Makefile.am:
+
+
+examplesdir = $(prefix)/examples/@PACKAGE@
+AM_CFLAGS = -I../include
+
+examples_PROGRAMS = amplitude amplituded beta binary_search bootstrap bottom_location cart2sph cbin_stack cbin_stack_update cc cc_positive cc_trace circle cmt2tp complex_divide confidence convolve ellipcor_kennett envelope_hilbert filenr findjunction findrayp freq_amp_phase gaussblur_1d gaussian gcpdistance interp2_linear interp3_linear legendre ll2tp max_ampd max_vald min_vald mollifier normalize normalize_window normalized p_norm p_norm_err permutation phase_shift pick_onset prem rad_pat rad_pat_loc ramp_function random_gaussian random_int random_num ray_path rayp2takeoff read_sac retrend retrendd reverse_array shift_array shift_stack simpsonx snr_envelope snr_envelope_sac sort_quick sort_quickd sph2cart sphdist std_errd std_weight stde stded student_cdf student_icdf student_pdf taper taperd tp2ll tpangle union_sets waterlevel_decon waypoint waypoint_az waypoint_deeppath weighted_sum wiginterpd
+
+examples_DATA = 200608250044.CN.LMN.BHT.sac 200608250044.TA.X13A.BHT.sac amplitude_infile bootstrap_clean_signal bootstrap_gen_data.m bootstrap_in bootstrap_matlab.m bootstrap_out bootstrap_out_std butterworth_infile butterworth_matlab.m butterworth_out_sac cc_infile1 cc_infile2 cc_matlab.m cc_out envelope_hilbert_in envelope_hilbert_matlab.m envelope_hilbert_out envelope_hilbert_sac findjunction.infile1 findjunction.infile2 freq_amp_phase_freq_AMP_Phase freq_amp_phase_in freq_amp_phase_matlab.m gaussblur_1d_infile gaussblur_1d_matlab.m gaussblur_1d_out1 gaussblur_1d_out2 max_val_infile min_val_infile normalize_infile normalize_outfile normalize_window_out normalized_out normalized_outfile phase_shift_in phase_shift_matlab.m phase_shift_out pick_onset_infile1 pick_onset_matlab.m prem_out prem_out1 prem_out2 random_gaussian_out random_int_out random_num_out ray_path_out read_sac_matlab.m read_sac_out_C read_sac_out_SAC retrend_infile retrend_matlab.m retrend_out snr_envelope_infile snr_envelope_matlab.m sort_quick_infile sort_quick_out std_err_infile std_weight_infile stde_infile taper_infile taper_matlab.m taper_out taper_out_sac taup_path.gmt test_in_1_2 test_matlab.m test_out_1 test_out_2 waterlevel_decon_matlab.m waterlevel_decon_out_decon waterlevel_decon_out_pulse waterlevel_decon_out_signal waterlevel_decon_out_source waterlevel_decon_out_structure weighted_sum_infile wiginterpd_infile wiginterpd_matlab.m wiginterpd_out wiginterpd_out_sac
+
+amplitude_SOURCES = amplitude.c
+amplitude_LDADD = ../lib/libASU_tools.a
+
+amplituded_SOURCES = amplituded.c
+amplituded_LDADD = ../lib/libASU_tools.a
+
+beta_SOURCES = beta.c
+beta_LDADD = ../lib/libASU_tools.a
+
+binary_search_SOURCES = binary_search.c
+binary_search_LDADD = ../lib/libASU_tools.a
+
+bootstrap_SOURCES = bootstrap.c
+bootstrap_LDADD = ../lib/libASU_tools.a
+
+bottom_location_SOURCES = bottom_location.c
+bottom_location_LDADD = ../lib/libASU_tools.a
+
+cart2sph_SOURCES = cart2sph.c
+cart2sph_LDADD = ../lib/libASU_tools.a
+
+cbin_stack_SOURCES = cbin_stack.c
+cbin_stack_LDADD = ../lib/libASU_tools.a
+
+cbin_stack_update_SOURCES = cbin_stack_update.c
+cbin_stack_update_LDADD = ../lib/libASU_tools.a
+
+cc_SOURCES = cc.c
+cc_LDADD = ../lib/libASU_tools.a
+
+cc_positive_SOURCES = cc_positive.c
+cc_positive_LDADD = ../lib/libASU_tools.a
+
+cc_trace_SOURCES = cc_trace.c
+cc_trace_LDADD = ../lib/libASU_tools.a
+
+circle_SOURCES = circle.c
+circle_LDADD = ../lib/libASU_tools.a
+
+cmt2tp_SOURCES = cmt2tp.c
+cmt2tp_LDADD = ../lib/libASU_tools.a
+
+complex_divide_SOURCES = complex_divide.c
+complex_divide_LDADD = ../lib/libASU_tools.a
+
+confidence_SOURCES = confidence.c
+confidence_LDADD = ../lib/libASU_tools.a
+
+convolve_SOURCES = convolve.c
+convolve_LDADD = ../lib/libASU_tools.a
+
+ellipcor_kennett_SOURCES = ellipcor_kennett.c
+ellipcor_kennett_LDADD = ../lib/libASU_tools.a
+
+envelope_hilbert_SOURCES = envelope_hilbert.c
+envelope_hilbert_LDADD = ../lib/libASU_tools.a
+
+filenr_SOURCES = filenr.c
+filenr_LDADD = ../lib/libASU_tools.a
+
+findjunction_SOURCES = findjunction.c
+findjunction_LDADD = ../lib/libASU_tools.a
+
+findrayp_SOURCES = findrayp.c
+findrayp_LDADD = ../lib/libASU_tools.a
+
+freq_amp_phase_SOURCES = freq_amp_phase.c
+freq_amp_phase_LDADD = ../lib/libASU_tools.a
+
+gaussblur_1d_SOURCES = gaussblur_1d.c
+gaussblur_1d_LDADD = ../lib/libASU_tools.a
+
+gaussian_SOURCES = gaussian.c
+gaussian_LDADD = ../lib/libASU_tools.a
+
+gcpdistance_SOURCES = gcpdistance.c
+gcpdistance_LDADD = ../lib/libASU_tools.a
+
+interp2_linear_SOURCES = interp2_linear.c
+interp2_linear_LDADD = ../lib/libASU_tools.a
+
+interp3_linear_SOURCES = interp3_linear.c
+interp3_linear_LDADD = ../lib/libASU_tools.a
+
+legendre_SOURCES = legendre.c
+legendre_LDADD = ../lib/libASU_tools.a
+
+ll2tp_SOURCES = ll2tp.c
+ll2tp_LDADD = ../lib/libASU_tools.a
+
+max_ampd_SOURCES = max_ampd.c
+max_ampd_LDADD = ../lib/libASU_tools.a
+
+max_vald_SOURCES = max_vald.c
+max_vald_LDADD = ../lib/libASU_tools.a
+
+min_vald_SOURCES = min_vald.c
+min_vald_LDADD = ../lib/libASU_tools.a
+
+mollifier_SOURCES = mollifier.c
+mollifier_LDADD = ../lib/libASU_tools.a
+
+normalize_SOURCES = normalize.c
+normalize_LDADD = ../lib/libASU_tools.a
+
+normalize_window_SOURCES = normalize_window.c
+normalize_window_LDADD = ../lib/libASU_tools.a
+
+normalized_SOURCES = normalized.c
+normalized_LDADD = ../lib/libASU_tools.a
+
+p_norm_SOURCES = p_norm.c
+p_norm_LDADD = ../lib/libASU_tools.a
+
+p_norm_err_SOURCES = p_norm_err.c
+p_norm_err_LDADD = ../lib/libASU_tools.a
+
+permutation_SOURCES = permutation.c
+permutation_LDADD = ../lib/libASU_tools.a
+
+phase_shift_SOURCES = phase_shift.c
+phase_shift_LDADD = ../lib/libASU_tools.a
+
+pick_onset_SOURCES = pick_onset.c
+pick_onset_LDADD = ../lib/libASU_tools.a
+
+prem_SOURCES = prem.c
+prem_LDADD = ../lib/libASU_tools.a
+
+rad_pat_SOURCES = rad_pat.c
+rad_pat_LDADD = ../lib/libASU_tools.a
+
+rad_pat_loc_SOURCES = rad_pat_loc.c
+rad_pat_loc_LDADD = ../lib/libASU_tools.a
+
+ramp_function_SOURCES = ramp_function.c
+ramp_function_LDADD = ../lib/libASU_tools.a
+
+random_gaussian_SOURCES = random_gaussian.c
+random_gaussian_LDADD = ../lib/libASU_tools.a
+
+random_int_SOURCES = random_int.c
+random_int_LDADD = ../lib/libASU_tools.a
+
+random_num_SOURCES = random_num.c
+random_num_LDADD = ../lib/libASU_tools.a
+
+ray_path_SOURCES = ray_path.c
+ray_path_LDADD = ../lib/libASU_tools.a
+
+rayp2takeoff_SOURCES = rayp2takeoff.c
+rayp2takeoff_LDADD = ../lib/libASU_tools.a
+
+read_sac_SOURCES = read_sac.c
+read_sac_LDADD = ../lib/libASU_tools.a
+
+retrend_SOURCES = retrend.c
+retrend_LDADD = ../lib/libASU_tools.a
+
+retrendd_SOURCES = retrendd.c
+retrendd_LDADD = ../lib/libASU_tools.a
+
+reverse_array_SOURCES = reverse_array.c
+reverse_array_LDADD = ../lib/libASU_tools.a
+
+shift_array_SOURCES = shift_array.c
+shift_array_LDADD = ../lib/libASU_tools.a
+
+shift_stack_SOURCES = shift_stack.c
+shift_stack_LDADD = ../lib/libASU_tools.a
+
+simpsonx_SOURCES = simpsonx.c
+simpsonx_LDADD = ../lib/libASU_tools.a
+
+snr_envelope_SOURCES = snr_envelope.c
+snr_envelope_LDADD = ../lib/libASU_tools.a
+
+snr_envelope_sac_SOURCES = snr_envelope_sac.c
+snr_envelope_sac_LDADD = ../lib/libASU_tools.a
+
+sort_quick_SOURCES = sort_quick.c
+sort_quick_LDADD = ../lib/libASU_tools.a
+
+sort_quickd_SOURCES = sort_quickd.c
+sort_quickd_LDADD = ../lib/libASU_tools.a
+
+sph2cart_SOURCES = sph2cart.c
+sph2cart_LDADD = ../lib/libASU_tools.a
+
+sphdist_SOURCES = sphdist.c
+sphdist_LDADD = ../lib/libASU_tools.a
+
+std_errd_SOURCES = std_errd.c
+std_errd_LDADD = ../lib/libASU_tools.a
+
+std_weight_SOURCES = std_weight.c
+std_weight_LDADD = ../lib/libASU_tools.a
+
+stde_SOURCES = stde.c
+stde_LDADD = ../lib/libASU_tools.a
+
+stded_SOURCES = stded.c
+stded_LDADD = ../lib/libASU_tools.a
+
+student_cdf_SOURCES = student_cdf.c
+student_cdf_LDADD = ../lib/libASU_tools.a
+
+student_icdf_SOURCES = student_icdf.c
+student_icdf_LDADD = ../lib/libASU_tools.a
+
+student_pdf_SOURCES = student_pdf.c
+student_pdf_LDADD = ../lib/libASU_tools.a
+
+taper_SOURCES = taper.c
+taper_LDADD = ../lib/libASU_tools.a
+
+taperd_SOURCES = taperd.c
+taperd_LDADD = ../lib/libASU_tools.a
+
+tp2ll_SOURCES = tp2ll.c
+tp2ll_LDADD = ../lib/libASU_tools.a
+
+tpangle_SOURCES = tpangle.c
+tpangle_LDADD = ../lib/libASU_tools.a
+
+union_sets_SOURCES = union_sets.c
+union_sets_LDADD = ../lib/libASU_tools.a
+
+waterlevel_decon_SOURCES = waterlevel_decon.c
+waterlevel_decon_LDADD = ../lib/libASU_tools.a
+
+waypoint_SOURCES = waypoint.c
+waypoint_LDADD = ../lib/libASU_tools.a
+
+waypoint_az_SOURCES = waypoint_az.c
+waypoint_az_LDADD = ../lib/libASU_tools.a
+
+waypoint_deeppath_SOURCES = waypoint_deeppath.c
+waypoint_deeppath_LDADD = ../lib/libASU_tools.a
+
+weighted_sum_SOURCES = weighted_sum.c
+weighted_sum_LDADD = ../lib/libASU_tools.a
+
+wiginterpd_SOURCES = wiginterpd.c
+wiginterpd_LDADD = ../lib/libASU_tools.a
+
+
+# 8. aclocal ;  automake --add-missing ; autoconf
