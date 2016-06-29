@@ -126,6 +126,7 @@ float  sum_f(float *, int);
 int    sum_i(int *, int);
 void   taper(float *, int, double);
 void   taperd(double *, int, double);
+void   taperd_section(double *, int, double, double);
 void   tp2ll(double, double, double *, double *);
 double tpangle(double, double, double, double);
 void   tstar(double, int, double, double *);
