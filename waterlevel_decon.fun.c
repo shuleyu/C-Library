@@ -18,7 +18,7 @@
  * 2*max(xnptsy,ynpts) to prevent wrap around artifacts.
  *
  * (for waterlevel_decon_wl:)
- * Differ from water_decon in the multiple waterlevel sset up.
+ * Differ from water_decon in the multiple waterlevels set up.
  *
  * double **x             ----  2-D array pointer x ( signal ).
  * int    xnptsx          ----  Number of traces.

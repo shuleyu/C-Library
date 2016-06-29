@@ -1,9 +1,10 @@
 #include<math.h>
 #include<ASU_tools.h>
 
-// 2 functions
+// 3 functions
 // taper
 // taperd
+// taperd_section
 
 /***********************************************************
  * This C function taper input signal, using Hanning Window.
@@ -11,7 +12,23 @@
  * float/double *p     ----  Array ponter.
  * int          npts   ----  Data length.
  * double       width  ----  Taper window half-length.
- *                           ( proportional to npts )
+ *                           ( proportional to npts:
+ *                             if width=0.5, window cover
+ *                             the whole signal)
+ * e.g.
+ *                         Signal:    ************************* (npts=25)
+ *                        Tapered:    tttt*****************tttt (width=4/25)
+ *
+ *
+ *
+ * for taperd_section:
+ * double       zerowidth  ----  Zero out the section in this window.
+ *
+ * e.g.
+ *                         Signal:    ************************* (npts=25)
+ *                  After ZeroOut:    0000*****************0000 (zerowidth=4/25)
+ *                     Then Taper:    0000tttttt*****tttttt0000 (width=6/(25-8))
+ *
  *
  * Shule Yu
  * Feb 14 2014
@@ -66,4 +83,17 @@ void taperd(double *p, int npts, double width){
         p[npts-1-count]*=weight;
     }
     return;
+}
+
+void taperd_section(double *p, int npts, double zerowidth, double width){
+	
+	int count,N=(int)ceil(npts*zerowidth);
+	
+	for (count=0;count<N;count++){
+		p[count]=0;
+		p[npts-count-1]=0;
+	}
+	taperd(p+N,npts-2*N,width);
+
+	return;
 }

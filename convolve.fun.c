@@ -7,8 +7,8 @@
  * double array.
  *
  * double *x    ----  Array pointer x.
- * int    nx    ----  Length of x.
  * double *y    ----  Array pointer y.
+ * int    nx    ----  Length of x.
  * int    ny    ----  Length of y.
  * double *ans  ----  Array pointer ans.
  *                    Pre-malloced. Length is nx+ny-1.

@@ -44,6 +44,10 @@
  *           sum of x*y of the overlapping part * sqrt ( min( xx, yy ) )
  *    CCC = ---------------------------------------------------------------
  *            sqrt(sum of x^2)*sqrt(sum of y^2) * sqrt ( max (xx, yy ) )
+ *
+ * 		xx = sum of x^2
+ * 		yy = sum of y^2
+ *
  * This design is for comparisons which need to take absolute
  * amplitude of the two trace into account.
  *
@@ -91,7 +95,7 @@ int CC(double *x, int xlen, double *y, int ylen, int *shift, double *CCC){
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<1 || ylen<1){
+    if (xlen<=1 || ylen<=1){
         printf("In %s: Sequence too short !\n",__func__);
         return 1;
     }
@@ -142,7 +146,7 @@ int CC_positive(double *x, int xlen, double *y, int ylen, int *shift, double *CC
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<1 || ylen<1){
+    if (xlen<=1 || ylen<=1){
         printf("In %s: Sequence too short !\n",__func__);
         return 1;
     }
@@ -193,7 +197,7 @@ int CC_trace(double *x, int xlen, double *y, int ylen, int *shift, double *CCC, 
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<1 || ylen<1){
+    if (xlen<=1 || ylen<=1){
         printf("In %s: Sequence too short !\n",__func__);
         return 1;
     }
@@ -243,7 +247,7 @@ int CC_static(double *x, int xlen, double *y, int ylen, double *CCC){
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<1 || ylen<1){
+    if (xlen<=1 || ylen<=1){
         printf("In %s: Sequence too short !\n",__func__);
         return 1;
     }
@@ -285,7 +289,7 @@ int CC_static_energy(double *x, int xlen, double *y, int ylen, double *CCC){
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<1 || ylen<1){
+    if (xlen<=1 || ylen<=1){
         printf("In %s: Sequence too short !\n",__func__);
         return 1;
     }
@@ -328,7 +332,7 @@ int CC_limitshift(double *x, int xlen, double *y, int ylen, int *shift, double *
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<1 || ylen<1){
+    if (xlen<=1 || ylen<=1){
         printf("In %s: Sequence too short !\n",__func__);
         return 1;
     }

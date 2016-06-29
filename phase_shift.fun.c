@@ -30,7 +30,7 @@ void phase_shift(double *x,int NPTS,double shift,double *y){
 
     flag=0;
     if ( NPTS%2==1 ){
-        printf("In %s: NPTS is an odd number, pading it with zero ...\n",__func__);
+//         printf("In %s: NPTS is an odd number, pading it with zero ...\n",__func__);
         NPTS++;
         flag=1;
     }
