@@ -132,6 +132,9 @@ int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,doub
             continue;
         }
 
+		// Taper
+		taperd(data[count],nptsy,taperwidth);
+
         // Interpolate / Decimate then cut data.
 		wiginterp_f(rawtime,rawdata,rawnpts,newtime,data[count],nptsy,interp_flag);
 // 		if (delta>rawdel+0.00001){
@@ -144,9 +147,6 @@ int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,doub
 		}
 
         // Filter.
-		if (flag_filter!=0){
-            taperd(data[count],nptsy,taperwidth);
-		}
         if (flag_filter==1){
 			butterworth_lp(&data[count],1,nptsy,delta,order,passes,f2,&data[count]);
 		}
