@@ -6,7 +6,7 @@
  * This C function convert rayparameter in Taup, event depth
  * ,phase selected to take-off angle ( in rad. ).
  *
- * double rayp     ----  Ray parameter as the output of taup.
+ * double rayp     ----  Ray parameter as the output of TauP.
  * double depth    ----  Event depth.
  * int    phase    ----  1 P-wave.
  *                       other S-wave.
