@@ -17,12 +17,14 @@
  * Sept 18 2014
  *
  * Note     : when weight!=0's record number <= 1 , return 0.
+ *            In method 1, when weights=1, the std result is the same as std_d.
  *
  * Key words: standard deviation, weighted
  *
  * Reference:
- * 
+ *
  *     Method 1: http://www.itl.nist.gov/div898/software/dataplot/refman2/ch2/weightsd.pdf
+ *
  *     Method 2: http://www.analyticalgroup.com/download/WEIGHTED_MEAN.pdf
 ***********************************************************/
 
@@ -65,7 +67,7 @@ double std_weight(double *p, double *w, int npts){
 	// Method 2.
 // 	int    count;
 // 	double avrx,W,UpLeft;
-// 
+//
 //     W=0;
 //     avrx=0;
 // 	UpLeft=0;
@@ -74,6 +76,6 @@ double std_weight(double *p, double *w, int npts){
 //         avrx+=w[count]*p[count];
 // 		UpLeft+=fabs(w[count])*pow(p[count],2);
 //     }
-// 
+//
 // 	return sqrt((UpLeft-pow(avrx,2)/W)/(W-1));
 }

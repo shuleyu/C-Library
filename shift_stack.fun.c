@@ -19,6 +19,7 @@
  *                           Negative value means flip.
  * double *stack       ----  Output value, stack.
  * double *std         ----  Output value, std.
+ *                           If flag_weight=0, use std_d calculate std.
  *
  * Shule Yu
  * Oct 01 2014
@@ -102,7 +103,13 @@ void shift_stack(double **p, int nptsx, int nptsy, int flag_shift, int *shift, i
                 tmparray[count2]=p[count2][count-Shift[count2]];
             }
         }
-        std[count]=std_weight(tmparray,Weight,nptsx);
+
+		if (flag_weight==1){
+			std[count]=std_weight(tmparray,Weight,nptsx);
+		}
+		else{
+			std[count]=std_d(tmparray,nptsx);
+		}
     }
 
     if (flag_shift!=1){

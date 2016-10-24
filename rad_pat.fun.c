@@ -9,7 +9,8 @@
 
 /***********************************************************
  * This C function calculate the radiation pattern ( amplitude )
- * for given fault orientation and ray path orientation.
+ * for given fault orientation and ray path orientation on
+ * the lower hamisphere.
  *
  * (for rad_pat_loc:)
  * The ray path orientation is calculated using given event/

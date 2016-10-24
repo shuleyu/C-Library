@@ -5,7 +5,7 @@
 int main(){
 
     int   npts=8000,Cnt;
-	double delta=0.025,ts=0.603;
+	double delta=0.025,ts=0.9;
 	double *p;
 	p=(double *)malloc(npts*sizeof(double));
 

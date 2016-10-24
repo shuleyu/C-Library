@@ -7,7 +7,7 @@ int main(){
 
     int    nptsx,nptsy,count,count2,BootNum;
     FILE   *fp,*fp2;
-    double **p,*w,**Boot,*sigma;
+    double **p,*w,**Boot,*sigma,*avr;
     char   tmpstr[1000];
 
     BootNum=5000;
@@ -29,6 +29,7 @@ int main(){
     }
 
     sigma=(double *)malloc(nptsy*sizeof(double));
+    avr=(double *)malloc(nptsy*sizeof(double));
 
     // Read input.
     fp=fopen(tmpstr,"r");
@@ -39,27 +40,26 @@ int main(){
     }
     fclose(fp);
 
-    // Output.
-    fp=fopen("data/bootstrap_out","w");
-    fp2=fopen("data/bootstrap_out_std","w");
 
     // Use function.
-    bootstrap(p,nptsx,nptsy,0,w,BootNum,Boot,sigma);
+    bootstrap(p,nptsx,nptsy,BootNum,avr,sigma,Boot,0,w);
 
-    for (count=0;count<BootNum;count++){
-        for (count2=0;count2<nptsy-1;count2++){
-            fprintf(fp,"%.6e\t",Boot[count][count2]);
+    // Output.
+    fp=fopen("data/bootstrap_out","w");
+    for (count=0;count<nptsy;count++){
+		for (count2=0;count2<BootNum;count2++){
+            fprintf(fp,"%.6e\t",Boot[count2][count]);
         }
-        fprintf(fp,"%.6e\n",Boot[count][count2]);
+		fprintf(fp,"\n");
     }
-
-    for (count=0;count<nptsy-1;count++){
-        fprintf(fp2,"%.6e\t",sigma[count]);
-    }
-    fprintf(fp2,"%.6e\n",sigma[count]);
-
     fclose(fp);
+
+    fp2=fopen("data/bootstrap_out_avr_std","w");
+    for (count=0;count<nptsy;count++){
+        fprintf(fp2,"%.6e\t%.6e\n",avr[count],sigma[count]);
+    }
     fclose(fp2);
+
 
     for (count=0;count<BootNum;count++){
         free(Boot[count]);

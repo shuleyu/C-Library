@@ -11,15 +11,15 @@ Clean=textread('bootstrap_clean_signal');
 A=A(:,1:end-1);
 Clean=Clean(:,1:end-1);
 
-B_C=textread('bootstrap_out');
-STD_C=textread('bootstrap_out_std');
+B=textread('bootstrap_out_avr_std');
+Mean_C=B(:,1);
+STD_C=B(:,2);
 
 B_M=bootstrp(bootN,@mean,A);
 for i=1:nptsy
     STD_M(i)=std(B_M(:,i));
 end
 
-Mean_C=mean(B_C);
 Mean_M=mean(B_M);
 
 ax1=subplot(4,1,1);

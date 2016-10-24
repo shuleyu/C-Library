@@ -95,8 +95,12 @@ int CC(double *x, int xlen, double *y, int ylen, int *shift, double *CCC){
     *CCC=0;
 
     // If signals are too short, return an error flag.
-    if (xlen<=1 || ylen<=1){
-        printf("In %s: Sequence too short !\n",__func__);
+    if (xlen<=1){
+        printf("In %s: X Sequence too short !\n",__func__);
+        return 1;
+    }
+    if (ylen<=1){
+        printf("In %s: Y Sequence too short !\n",__func__);
         return 1;
     }
 

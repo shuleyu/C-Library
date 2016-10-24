@@ -7,7 +7,7 @@
 
 /***********************************************************
  * This C function use quick sort algorithm to sort an input
- * array.
+ * array to ascending order.
  *
  * float/double *p    ----  Array pointer.
  * int          npts  ----  Array length.

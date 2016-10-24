@@ -10,7 +10,7 @@
  * double depth    ----  Event depth.
  * int    phase    ----  1 P-wave.
  *                       other S-wave.
- * double takeoff  ----  Take off angle for this ray.
+ * double takeoff  ----  Take off angle for this ray (in rad).
  *
  * Shule Yu
  * May 15 2014
