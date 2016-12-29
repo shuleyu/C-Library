@@ -126,8 +126,14 @@ void waterlevel_decon(double **x,int xnptsx,int xnptsy,double *y,int ynpts, int 
                 out[count][1]=0.0;
             }
         }
+
+		// If use ESW phase information:
         esf_filled_real[count]=out[count][0];
         esf_filled_imag[count]=out[count][1];
+
+		// If ignore ESW phase information (should also comment out shift_array ):
+//         esf_filled_real[count]=esf_unfilled_amp[count]<W?W:esf_unfilled_amp[count];
+//         esf_filled_imag[count]=0;
     }
 
 

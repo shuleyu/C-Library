@@ -5,9 +5,9 @@
  * This C function make division between two complex number:
  * a+ib and c+id, let the result be e+if:
  *
- *        a+ib
- * e+if= ------
- *        c+id
+ *        a+bi
+ * e+fi= ------
+ *        c+di
  *
  * double a   ----  a.
  * double b   ----  b.

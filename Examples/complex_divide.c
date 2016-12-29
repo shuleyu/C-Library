@@ -4,10 +4,10 @@
 int main(){
     
     double a,b,c,d,e,f;
-    a=1.332;
-    b=23.42;
-    c=23.75;
-    d=9.35;
+    a=1;
+    b=2;
+    c=1;
+    d=0;
     
     // Use function:
     complex_divide(a,b,c,d,&e,&f);
