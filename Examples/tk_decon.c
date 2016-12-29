@@ -7,14 +7,14 @@ int main(){
 
     int    NPTS_struct,NPTS_source,NPTS_signal,NPTS_decon,count,P1,P2;
     FILE   *fp;
-    double delta,sigma,gwidth,*structure,*source,*signal,**decon,waterlevel,taperwidth,sigma_smooth,secondarrival,secondamp,ulvzarrival,ulvzamp;
+    double delta,sigma,gwidth,*structure,*source,*signal,**decon,lambda,taperwidth,sigma_smooth,secondarrival,secondamp,ulvzarrival,ulvzamp;
 
     // Parameters.
     delta=0.025;
     sigma=2;
     gwidth=50;
     sigma_smooth=0.1;
-    waterlevel=0.1;
+    lambda=0.1;
     taperwidth=0.1;
     secondarrival=3;
     secondamp=0.3;
@@ -65,7 +65,7 @@ int main(){
     // Decon.
 // 	butterworth_lp(&signal,1,NPTS_signal,delta,2,2,5,&signal);
 
-    waterlevel_decon(&signal,1,NPTS_signal,source,NPTS_source,P1,&P2,decon,waterlevel,delta,0,NULL,NULL,NULL,NULL,NULL,NULL);
+    tk_decon(&signal,1,NPTS_signal,source,NPTS_source,P1,&P2,decon,lambda,delta,0,NULL,NULL,NULL,NULL,NULL,NULL);
 
 
     // Smooth and normalze.
@@ -74,25 +74,25 @@ int main(){
 
 
     // Output.
-    fp=fopen("data/waterlevel_decon_out_structure","w");
+    fp=fopen("data/tk_decon_out_structure","w");
     for (count=0;count<NPTS_struct;count++){
         fprintf(fp,"%lf\t%lf\n",delta*(count-NPTS_struct/2),structure[count]);
     }
     fclose(fp);
 
-    fp=fopen("data/waterlevel_decon_out_source","w");
+    fp=fopen("data/tk_decon_out_source","w");
     for (count=0;count<NPTS_source;count++){
         fprintf(fp,"%lf\t%lf\n",delta*(count-P1),source[count]);
     }
     fclose(fp);
 
-    fp=fopen("data/waterlevel_decon_out_signal","w");
+    fp=fopen("data/tk_decon_out_signal","w");
     for (count=0;count<NPTS_signal;count++){
         fprintf(fp,"%lf\t%lf\n",delta*(count-P2),signal[count]);
     }
     fclose(fp);
 
-    fp=fopen("data/waterlevel_decon_out_decon","w");
+    fp=fopen("data/tk_decon_out_decon","w");
     for (count=0;count<2*NPTS_signal;count++){
         fprintf(fp,"%lf\t%lf\n",delta*(count-NPTS_signal),decon[0][count]);
     }
@@ -107,4 +107,4 @@ int main(){
     return 0;
 }
 // Visualize data.
-// See waterlevel_decon_matlab.m
+// See tk_decon_matlab.m
