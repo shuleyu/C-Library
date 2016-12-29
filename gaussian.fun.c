@@ -17,12 +17,12 @@
  * double mu     ----  average value, mu.
  *
  * for gaussianfun:
+ * signal is centered at the peak.
  *
  * double *p     ----  output signal, pre-mallocated space. (1*npts)
  * int    npts   ----  signal length.
  * double delta  ----  sampling rate. 
  * double sigma  ----  standard deviation, sigma.
- * dooule mu     ----  average value, mu.
  *
  * Shule Yu
  * Jul 06 2014
@@ -47,7 +47,7 @@ double gaussian(double x,double sigma,double mu){
     }
 }
 
-void gaussianfun(double *p,int npts,double delta,double sigma,double mu){
+void gaussianfun(double *p,int npts,double delta,double sigma){
 
 	int count;
 

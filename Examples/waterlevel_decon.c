@@ -45,12 +45,8 @@ int main(){
 
 
     // Make source, use gaussian with sigma.
-    source[NPTS_source/2]=gaussian(0,sigma,0);
-    for (count=0;count<NPTS_source/2;count++){
-        source[count]=gaussian(-(NPTS_source/2-count)*delta,sigma,0);
-        source[NPTS_source-1-count]=source[count];
-    }
-
+// 	gaussianfun(source,NPTS_source,delta,sigma);
+	trifun(source,NPTS_source,10.0/(NPTS_source*delta));
 
     for (count=0;count<NPTS_source-(int)(secondarrival/delta);count++){
         source[count]+=secondamp*source[count+(int)(secondarrival/delta)];
@@ -79,25 +75,25 @@ int main(){
     // Output.
     fp=fopen("data/waterlevel_decon_out_structure","w");
     for (count=0;count<NPTS_struct;count++){
-        fprintf(fp,"%lf\t%lf\n",delta*count,structure[count]);
+        fprintf(fp,"%lf\t%lf\n",delta*(count-NPTS_struct/2),structure[count]);
     }
     fclose(fp);
 
     fp=fopen("data/waterlevel_decon_out_source","w");
     for (count=0;count<NPTS_source;count++){
-        fprintf(fp,"%lf\t%lf\n",delta*count,source[count]);
+        fprintf(fp,"%lf\t%lf\n",delta*(count-P1),source[count]);
     }
     fclose(fp);
 
     fp=fopen("data/waterlevel_decon_out_signal","w");
     for (count=0;count<NPTS_signal;count++){
-        fprintf(fp,"%lf\t%lf\n",delta*count,signal[count]);
+        fprintf(fp,"%lf\t%lf\n",delta*(count-P2),signal[count]);
     }
     fclose(fp);
 
     fp=fopen("data/waterlevel_decon_out_decon","w");
     for (count=0;count<2*NPTS_signal;count++){
-        fprintf(fp,"%lf\t%lf\n",delta*count,decon[0][count]);
+        fprintf(fp,"%lf\t%lf\n",delta*(count-NPTS_signal),decon[0][count]);
     }
     fclose(fp);
 

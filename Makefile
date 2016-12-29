@@ -3,14 +3,15 @@ CC = gcc
 FLAGS = -Wall -Wimplicit
 COMP = $(CC) $(FLAGS)
 
-SACHOME = /opt/sac
-INCLUDE = -I. -I$(SACHOME)/include -I/opt/local/include
+SACHOME = /usr/local/sac
+SACHOME2 = /opt/sac
+INCLUDE = -I. -I$(SACHOME)/include -I$(SACHOME2)/include -I/opt/local/include
 
 all: libASU_tools.a
 	@echo > /dev/null
 
-libASU_tools.a: amplitude.fun.o binary_search.fun.o bootstrap.fun.o bottom_depth.fun.o bottom_location.fun.o cart2sph.fun.o cbin_update.fun.o cc.fun.o cmt2tp.fun.o complex_divide.fun.o confidence.fun.o convolve.fun.o ellipcor_kennett.fun.o envelope_hilbert.fun.o filenr.fun.o findjunction.fun.o findrayp.fun.o freq_amp_phase.fun.o gaussblur.fun.o gaussian.fun.o gcpdistance.fun.o interp_linear.fun.o ll2tp.fun.o mean.fun.o minmax.fun.o mixing.fun.o mollifier.fun.o normalize.fun.o combination.fun.o phase_shift.fun.o pick_onset.fun.o p_norm.fun.o prem.fun.o rad_pat.fun.o ramp_function.fun.o random.fun.o rayp2takeoff.fun.o ray_path.fun.o read_sac.fun.o retrend.fun.o reverse_array.fun.o shift_array.fun.o shift_stack.fun.o simpsonx.fun.o snr.fun.o sort_quick.fun.o sph2cart.fun.o sphdist.fun.o std.fun.o std_weight.fun.o taper.fun.o tp2ll.fun.o tpangle.fun.o union_sets.fun.o waterlevel_decon.fun.o waypoint.fun.o wiginterp.fun.o sum.fun.o butterworth.fun.o graycode.fun.o crossproduct.fun.o points_in_polygon.fun.o meshing.fun.o redirection.fun.o gmttrans.fun.o lon2360.fun.o lon2180.fun.o print_2d_array.fun.o tstar.fun.o findpeak.fun.o StretchTrace.fun.o SignalCompare.fun.o derivative.fun.o
-	ar cr libASU_tools.a amplitude.fun.o binary_search.fun.o bootstrap.fun.o bottom_depth.fun.o bottom_location.fun.o cart2sph.fun.o cbin_update.fun.o cc.fun.o cmt2tp.fun.o complex_divide.fun.o confidence.fun.o convolve.fun.o ellipcor_kennett.fun.o envelope_hilbert.fun.o filenr.fun.o findjunction.fun.o findrayp.fun.o freq_amp_phase.fun.o gaussblur.fun.o gaussian.fun.o gcpdistance.fun.o interp_linear.fun.o ll2tp.fun.o mean.fun.o minmax.fun.o mixing.fun.o mollifier.fun.o normalize.fun.o combination.fun.o phase_shift.fun.o pick_onset.fun.o p_norm.fun.o prem.fun.o rad_pat.fun.o ramp_function.fun.o random.fun.o rayp2takeoff.fun.o ray_path.fun.o read_sac.fun.o retrend.fun.o reverse_array.fun.o shift_array.fun.o shift_stack.fun.o simpsonx.fun.o snr.fun.o sort_quick.fun.o sph2cart.fun.o sphdist.fun.o std.fun.o std_weight.fun.o taper.fun.o tp2ll.fun.o tpangle.fun.o union_sets.fun.o waterlevel_decon.fun.o waypoint.fun.o wiginterp.fun.o sum.fun.o butterworth.fun.o graycode.fun.o crossproduct.fun.o points_in_polygon.fun.o meshing.fun.o redirection.fun.o gmttrans.fun.o lon2360.fun.o lon2180.fun.o print_2d_array.fun.o tstar.fun.o findpeak.fun.o StretchTrace.fun.o SignalCompare.fun.o derivative.fun.o
+libASU_tools.a: amplitude.fun.o binary_search.fun.o bootstrap.fun.o bottom_depth.fun.o bottom_location.fun.o cart2sph.fun.o cbin_update.fun.o cc.fun.o cmt2tp.fun.o complex_divide.fun.o confidence.fun.o convolve.fun.o ellipcor_kennett.fun.o envelope_hilbert.fun.o filenr.fun.o findjunction.fun.o findrayp.fun.o freq_amp_phase.fun.o gaussblur.fun.o gaussian.fun.o gcpdistance.fun.o interp_linear.fun.o ll2tp.fun.o mean.fun.o minmax.fun.o mixing.fun.o mollifier.fun.o normalize.fun.o combination.fun.o phase_shift.fun.o pick_onset.fun.o p_norm.fun.o prem.fun.o rad_pat.fun.o ramp_function.fun.o random.fun.o rayp2takeoff.fun.o ray_path.fun.o read_sac.fun.o retrend.fun.o reverse_array.fun.o shift_array.fun.o shift_stack.fun.o simpsonx.fun.o snr.fun.o sort_quick.fun.o sph2cart.fun.o sphdist.fun.o std.fun.o std_weight.fun.o taper.fun.o tp2ll.fun.o tpangle.fun.o union_sets.fun.o waterlevel_decon.fun.o waypoint.fun.o wiginterp.fun.o sum.fun.o butterworth.fun.o graycode.fun.o crossproduct.fun.o points_in_polygon.fun.o meshing.fun.o redirection.fun.o gmttrans.fun.o lon2360.fun.o lon2180.fun.o print_2d_array.fun.o tstar.fun.o findpeak.fun.o StretchTrace.fun.o SignalCompare.fun.o derivative.fun.o trifun.fun.o
+	ar cr libASU_tools.a amplitude.fun.o binary_search.fun.o bootstrap.fun.o bottom_depth.fun.o bottom_location.fun.o cart2sph.fun.o cbin_update.fun.o cc.fun.o cmt2tp.fun.o complex_divide.fun.o confidence.fun.o convolve.fun.o ellipcor_kennett.fun.o envelope_hilbert.fun.o filenr.fun.o findjunction.fun.o findrayp.fun.o freq_amp_phase.fun.o gaussblur.fun.o gaussian.fun.o gcpdistance.fun.o interp_linear.fun.o ll2tp.fun.o mean.fun.o minmax.fun.o mixing.fun.o mollifier.fun.o normalize.fun.o combination.fun.o phase_shift.fun.o pick_onset.fun.o p_norm.fun.o prem.fun.o rad_pat.fun.o ramp_function.fun.o random.fun.o rayp2takeoff.fun.o ray_path.fun.o read_sac.fun.o retrend.fun.o reverse_array.fun.o shift_array.fun.o shift_stack.fun.o simpsonx.fun.o snr.fun.o sort_quick.fun.o sph2cart.fun.o sphdist.fun.o std.fun.o std_weight.fun.o taper.fun.o tp2ll.fun.o tpangle.fun.o union_sets.fun.o waterlevel_decon.fun.o waypoint.fun.o wiginterp.fun.o sum.fun.o butterworth.fun.o graycode.fun.o crossproduct.fun.o points_in_polygon.fun.o meshing.fun.o redirection.fun.o gmttrans.fun.o lon2360.fun.o lon2180.fun.o print_2d_array.fun.o tstar.fun.o findpeak.fun.o StretchTrace.fun.o SignalCompare.fun.o derivative.fun.o trifun.fun.o
 
 amplitude.fun.o: amplitude.fun.c ASU_tools.h
 	$(COMP) -c amplitude.fun.c $(INCLUDE)
@@ -158,6 +159,8 @@ SignalCompare.fun.o: SignalCompare.fun.c ASU_tools.h
 	$(COMP) -c SignalCompare.fun.c $(INCLUDE)
 derivative.fun.o: derivative.fun.c ASU_tools.h
 	$(COMP) -c derivative.fun.c $(INCLUDE)
+trifun.fun.o: trifun.fun.c ASU_tools.h
+	$(COMP) -c trifun.fun.c $(INCLUDE)
 
 clean:
 	rm -f *.fun.o libASU_tools.a

@@ -51,7 +51,7 @@ void   findrayp_ulvz(double *, double *, double *, int, int, double *, double, d
 void   freq_amp_phase(double **, int, int, double, double *, double **, double **);
 void   gaussblur_1d(double **, int, int, double, double, double, double **);
 double gaussian(double, double, double);
-void   gaussianfun(double *, int, double, double, double);
+void   gaussianfun(double *, int, double, double);
 double gcpdistance(double, double, double, double);
 void   gmttrans_f(float *, int, int, float *, int *);
 void   graycode(int, int**);
@@ -138,6 +138,7 @@ void   taperd(double *, int, double);
 void   taperd_section(double *, int, double, double);
 void   tp2ll(double, double, double *, double *);
 double tpangle(double, double, double, double);
+void   trifun(double *, int, double);
 void   tstar(double, int, double, double *);
 void   union_sets(double *, double *, double *, double *, int, int *);
 void   waterlevel_decon(double **, int, int, double *, int, int, int *, double **, double, double, int, double *, double *, double **, double **, double **, double **);
