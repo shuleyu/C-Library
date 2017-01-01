@@ -121,7 +121,7 @@ void waterlevel_decon(double **x,int xnptsx,int xnptsy,double *y,int ynpts, int 
                 out[count][1]*=(W/esf_unfilled_amp[count]);
             }
             else {
-//                 printf("amplitude = 0 @ %.4lf Hz ..\n",count*df);
+                printf("amplitude = 0 @ %.4lf Hz ..\n",count*df);
                 out[count][0]=W;
                 out[count][1]=0.0;
             }

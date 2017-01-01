@@ -55,7 +55,7 @@
 void tk_decon(double **x,int xnptsx,int xnptsy,double *y,int ynpts, int P1, int *P2, double **deconed,double lambda,double delta,int verbose,double *filled_amp, double *filled_phase, double **fft_amp, double **fft_phase, double **divide_amp, double **divide_phase){
 
     int          NPTS,count,count2,NPTS_FFT,*flag;
-    double       *in,*esf_unfilled_amp,*esf_filled_real,*esf_filled_imag,df,*dummy_for_signal,*dummy_for_source;
+    double       *in,*esf_unfilled_amp,*esf_filled_real,*esf_filled_imag,*dummy_for_signal,*dummy_for_source;
     fftw_complex *out;
     fftw_plan    p1,p2;
 
@@ -67,7 +67,6 @@ void tk_decon(double **x,int xnptsx,int xnptsy,double *y,int ynpts, int P1, int 
     // Set up trace length.
     NPTS=(xnptsy>=ynpts)?(2*xnptsy):(2*ynpts);
     NPTS_FFT=NPTS/2+1;
-    df=1.0/delta/NPTS;
 
 
     // Malloc space for FFT.
