@@ -59,7 +59,12 @@ void StretchTrace(double *p, int npts, int Peak, double Hor, double Ver, double 
 		}
 	}
 
-	wiginterpd(time_old,p,npts,time_new+T1,amp_new+T1,T2-T1,0);
+	if (Hor!=1){
+		wiginterpd(time_old,p,npts,time_new+T1,amp_new+T1,T2-T1,0);
+	}
+	else{
+		for (index=0;index<npts;index++) amp_new[index]=p[index];
+	}
 
 	double AMP=p[Peak];
 	for (index=T1;index<T2;index++){

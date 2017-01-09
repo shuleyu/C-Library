@@ -132,19 +132,20 @@ int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,doub
             continue;
         }
 
-		// Taper
-		taperd(data[count],nptsy,taperwidth);
-
         // Interpolate / Decimate then cut data.
 		wiginterp_f(rawtime,rawdata,rawnpts,newtime,data[count],nptsy,interp_flag);
 // 		if (delta>rawdel+0.00001){
 // 			printf("In %s: Aliasing warning: %s, %.2e Hz -> %.2e Hz \n",__func__,filelist[count],rawdel,delta);
 // 		}
 
+
         // Retrend.
 		if (flag_retrend!=0){
 			retrendd(CutTime,data[count],nptsy,delta);
 		}
+
+		// Taper
+		taperd(data[count],nptsy,taperwidth);
 
         // Filter.
         if (flag_filter==1){
