@@ -26,7 +26,7 @@ int main(){
     fclose(fpin);
 
     // Use function.
-    CC_positive(x,xnpts,y,ynpts,&shift,&ccc,-1);
+    CC_positive(x,xnpts,y,ynpts,&shift,&ccc,1);
     printf("Shift: %d\nShift_time: %.2lf\nCCC: %.3lf\n",shift,shift*dt,ccc);
 
     fpout=fopen("data/cc_out","w");
