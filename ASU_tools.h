@@ -118,6 +118,7 @@ void   shift_stack(double **, int, int, int, int *, int, double *, double *, dou
 int    SignalCompare(double *, int, int, double *, int, int, double, double, double, double, int *, double *, double *, double *, double *);
 double simpsonx(double (*)(double), double, double, double);
 double snr_envelope(double *, int, int, int, int, int);
+double snr_peak(double *, int, int, int, int, int);
 void   sort_quick(float *, int);
 void   sort_quickd(double *, int);
 void   sort_quick_i(int *, int);

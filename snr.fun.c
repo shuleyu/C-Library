@@ -2,8 +2,9 @@
 #include<stdlib.h>
 #include<ASU_tools.h>
 
-// 1 function
+// 2 functions
 // snr_envelope
+// snr_peak
 
 /***********************************************************
  * This C function evaluate the signal to noise ratio of
@@ -13,6 +14,10 @@
  * Step1. Calculate S^2+H^2. H is the Hilbert transform of S.
  * Step2. Integrate between singal window and noise window.
  * Step3. Return the ratio, normalized by window lengths.
+ *
+ * (for snr_peak:)
+ * Take the ratio of amplitude within signal window and 
+ * the amplitude within the noise window as SNR.
  *
  * double *p    ----  Input array pointer.
  * int    npts  ----  Array npts.
@@ -63,4 +68,18 @@ double snr_envelope(double *p, int npts,int nloc,int nlen,int sloc,int slen){
 
     // average with respect to their length.
     return Slevel/Nlevel*(1.0*nlen/slen);
+}
+
+double snr_peak(double *p,int npts,int nloc,int nlen,int sloc,int slen){
+
+	if (nloc<0 || nloc>npts || nlen<0 || nloc+nlen>npts){
+		printf("In %s: Noise window error ...\n",__func__);
+		return 0.0;
+	}
+	if (sloc<0 || sloc>npts || slen<0 || sloc+slen>npts){
+		printf("In %s: Signal window error ...\n",__func__);
+		return 0.0;
+	}
+
+    return amplituded(p+sloc,slen)/amplituded(p+nloc,nlen);
 }

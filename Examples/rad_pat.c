@@ -4,23 +4,20 @@
 
 int main(){
     double azimuth,take_off;
-    double strike,dip,rake,strike2,dip2,rake2;
+    double strike,dip,rake;
 
-    azimuth=326.445;
-    take_off=8.2;
+    azimuth=0;
 
-    strike=281;
-    dip=22;
-    rake=-40;
+    strike=0;
+    dip=90;
+    rake=0;
 
-//     Auxiliary plane calculated by http://www.wolframalpha.com.
-    strike2=48.88;
-    dip2=76.07;
-    rake2=-107.20;
+//     Auxiliary plane can be calculated at http://www.wolframalpha.com.
+// 	double strike2,dip2,rake2;
 
     // Use function.
-    printf("%.10lf\n",rad_pat(strike,dip,rake,azimuth,take_off,1));
-    printf("%.10lf\n",rad_pat(strike2,dip2,rake2,azimuth,take_off,1));
+	for (take_off=1;take_off<180;take_off+=15)
+		printf("%.10lf\n",rad_pat(strike,dip,rake,azimuth,take_off,2));
 
     return 0;
 }

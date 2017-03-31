@@ -80,7 +80,11 @@ double interp3_linear(double *p,double dx,double dy,double dz){
 
     if ( dx<0 || dx>1 || dy<0 || dy>1 || dz<0 || dz>1 ){
         printf("In %s: Point outside of cubic ...\n",__func__);
-        exit(1);
+        printf("       dx,dy,dx=%.2lf,%.2lf,%.2lf\n",dx,dy,dz);
+		double Sum=0;
+		for (int i=0;i<8;i++)
+			Sum+=p[i];
+		return Sum/8;
     }
 
     double c00,c10,c01,c11,c0,c1;

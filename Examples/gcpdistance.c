@@ -5,11 +5,11 @@ int main(){
 
     double lo1,la1,lo2,la2;
 
-    lo1=-117.105;
-    la1=32.8889;
+    lo1=276.545;
+    la1=9.780;
 
-    la2=-24.345;
-    lo2=-67.009;
+    lo2=238.008;
+    la2=46.062;
 
     // Use function.
     printf("%.10lf\n",gcpdistance(lo1,la1,lo2,la2));
