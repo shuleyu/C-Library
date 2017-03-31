@@ -33,8 +33,9 @@ int main(){
     // Use function.
 	points_in_polygon(x,y,npts_P,xx,yy,npts_L,WN);
 
-	for (Cnt=0;Cnt<1;Cnt++){
-		printf("%d\n",WN[Cnt]);
+	for (Cnt=0;Cnt<npts_P;Cnt++){
+		if (WN[Cnt]!=0) printf("(%.2lf, %.2lf) inside, winding number is %d\n",x[Cnt],y[Cnt],WN[Cnt]);
+		else printf("(%.2lf, %.2lf) outside, winding number is %d\n",x[Cnt],y[Cnt],WN[Cnt]);
 	}
     
     return 0;    

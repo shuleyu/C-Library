@@ -28,8 +28,8 @@
  * 						        as the left hand side area as one
  * 						        walks on its edge in the given array.
  *
- * 						        Points located on the edges are decided
- * 						        to be inside.
+ * 						        Points located on the left and bottom 
+ * 						        edges are decided to be inside.
  *
  *
  * Shule Yu
@@ -42,7 +42,6 @@
 void points_in_polygon(double *x,double *y,int npts_P,double *xx,double *yy,int npts_L,int *WN){
 
 	int Cnt,Cnt2;
-	double ex1,ey1,ex2,ey2;
 
 	for (Cnt=0;Cnt<npts_P;Cnt++){
 
@@ -50,31 +49,23 @@ void points_in_polygon(double *x,double *y,int npts_P,double *xx,double *yy,int 
 
 		for (Cnt2=0;Cnt2<npts_L;Cnt2++){
 
-			if (Cnt2!=npts_L-1){
-				ex1=xx[Cnt2];
-				ey1=yy[Cnt2];
-				ex2=xx[Cnt2+1];
-				ey2=yy[Cnt2+1];
+			double ex1,ey1,ex2,ey2;
+
+			ex1=xx[Cnt2];
+			ey1=yy[Cnt2];
+			ex2=xx[(Cnt2+1)%npts_L];
+			ey2=yy[(Cnt2+1)%npts_L];
+
+			if (ey1<=y[Cnt]){
+				if (y[Cnt]<ey2 && crossproduct_2d(ex1-x[Cnt],ey1-y[Cnt],ex2-x[Cnt],ey2-y[Cnt])>0){
+					WN[Cnt]++;
+				}
 			}
 			else{
-				ex1=xx[Cnt2];
-				ey1=yy[Cnt2];
-				ex2=xx[0];
-				ey2=yy[0];
+				if (ey2<=y[Cnt] && crossproduct_2d(ex1-x[Cnt],ey1-y[Cnt],ex2-x[Cnt],ey2-y[Cnt])<0){
+					WN[Cnt]--;
+				}
 			}
-
-			if (fmin(ey1,ey2)>y[Cnt] || fmax(ey1,ey2)<y[Cnt]){
-				continue;
-			}
-
-			if (ey1<ey2 && crossproduct_2d(ex1-x[Cnt],ey1-y[Cnt],ex2-x[Cnt],ey2-y[Cnt])>=0){
-				WN[Cnt]++;
-			}
-
-			if (ey1>ey2 && crossproduct_2d(ex1-x[Cnt],ey1-y[Cnt],ex2-x[Cnt],ey2-y[Cnt])<=0){
-				WN[Cnt]--;
-			}
-
 		}
 	}
 

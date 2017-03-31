@@ -4,7 +4,7 @@
 int main(){
 
     // Use function.
-    printf("%d\n",meshsize(1,2.1,0.5,0));
+    printf("%d\n",meshsize(-90,90,0.5,1));
 
     return 0;
 }

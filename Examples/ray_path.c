@@ -9,10 +9,10 @@ int main(int argc, char **argv){
     FILE   *fpout;
     double rayp,dh,Dmin,Dmax,dmin,dmax,*Radius,*Velocity,*deg,*radius,traveltime,traveldistance;
 
-    Dmin=100;
-    dmin=200;
-    dmax=2871;
-    Dmax=2891;
+    Dmin=0;
+    dmin=0;
+    dmax=2891;
+    Dmax=2892;
     dh=0.1;
 
     NPTS=(int)ceil((Dmax-Dmin)/dh);
@@ -25,7 +25,7 @@ int main(int argc, char **argv){
         Velocity[count]=r_vs(Radius[count]);
     }
 
-    rayp=(6371.0-dmin)*sin(30*M_PI/180)/d_vs(dmin);
+    rayp=(6371.0-dmin)*sin(0*M_PI/180)/d_vs(dmin);
 
     flag=ray_path(rayp,NPTS,Radius,Velocity,dmin,dmax,89.9,&traveltime,&traveldistance,deg,radius,&npts);
 
@@ -38,6 +38,8 @@ int main(int argc, char **argv){
     if (flag==1){
         printf("Ray turns !\n");
     }
+
+	printf("TravelTime: %.3lf\n",traveltime);
 
     free(Radius);
     free(Velocity);
