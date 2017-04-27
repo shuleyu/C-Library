@@ -128,16 +128,7 @@ void waypoint(double EVLO,double EVLA,double stlo, double stla,double dist,doubl
 
     // Step 8. Adjust longitude to -180 < plo <= 180.
 
-    if ((*plo)>0){
-        (*plo)-=360*floor((*plo+180)/360);
-    }
-    else{
-        (*plo)-=360*ceil((*plo-180)/360);
-    }
-
-    if ((*plo)==-180.0){
-        (*plo)=180.0;
-    }
+	(*plo)=lon2180(*plo);
 
     return;
 }
@@ -188,18 +179,9 @@ void waypoint_az(double EVLO,double EVLA,double az,double dist,double *plo,doubl
 
     // Step 8. Adjust longitude to -180 < plo <= 180.
 
-    if ((*plo)>0){
-        (*plo)-=360*floor((*plo+180)/360);
-    }
-    else{
-        (*plo)-=360*ceil((*plo-180)/360);
-    }
+	(*plo)=lon2180(*plo);
 
-    if ((*plo)==-180.0){
-        (*plo)=180.0;
-    }
-
-    return ;
+    return;
 }
 
 int waypoint_deeppath(char *P,double EVLO,double EVLA,double EVDP,double stlo,double stla,double depth,double *plo1,double *pla1,double *plo2,double *pla2){
