@@ -17,5 +17,6 @@ C
 
 [C,Lags]=xcorr(A,B);
 C=C/(sqrt(sum(A(:).^2))*sqrt(sum(B(:).^2)));
-[A,I]=max(C);
+[~,I]=max(abs(C));
 I-14000
+Lags(I)
