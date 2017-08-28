@@ -11,13 +11,21 @@
 // r_vs
 // r_vp
 // r_rho
-// prem_smoothed
+// prem_smoothed    // Remove first-order discontinuities.
 // d_vs_smoothed
 // d_vp_smoothed
 // d_rho_smoothed
 // r_vs_smoothed
 // r_vp_smoothed
 // r_rho_smoothed
+// prem_x           // Spline interpolate above 400km.
+//                  // Then degree2 from 600 km to the proper depth.
+// d_vs_x
+// d_vp_x
+// d_rho_x
+// r_vs_x
+// r_vp_x
+// r_rho_x
 
 /***********************************************************
  * This C function returns PREM model values.
@@ -68,7 +76,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 1221.5<=r && r<3480.0 ) {
-    // outter core
+    // 2891 ~ 5149.5 km, outter core.
 
         *rho=  -5.5281*pow(x,3) - 3.6426*pow(x,2) - 1.2638*pow(x,1) + 12.5815;
         *vpv= -13.5732*pow(x,3) + 4.8023*pow(x,2) - 4.0362*pow(x,1) + 11.0487;
@@ -79,7 +87,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 3480.0<=r && r<3630.0 ) {
-    // lower mantle 1
+    // 2741 ~ 2891 km, D''
 
         *rho= -3.0807*pow(x,3) + 5.5283*pow(x,2) - 6.4761*pow(x,1) + 7.9565;
         *vpv= -2.5514*pow(x,3) + 5.5242*pow(x,2) - 5.3181*pow(x,1) + 15.3891;
@@ -90,7 +98,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 3630.0<=r && r<5600.0 ) {
-    // lower mantle 2
+    // 771 ~ 2741 km
 
         *rho=  -3.0807*pow(x,3) +  5.5283*pow(x,2) -  6.4761*pow(x,1) +  7.9565;
         *vpv= -26.6419*pow(x,3) + 51.4832*pow(x,2) - 40.4673*pow(x,1) + 24.9520;
@@ -101,7 +109,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 5600.0<=r && r<5701.0 ) {
-    // lower mantle 3
+    // 670 ~ 771 km
 
         *rho= -3.0807*pow(x,3) + 5.5283*pow(x,2) -  6.4761*pow(x,1) +  7.9565;
         *vpv= -2.5514*pow(x,3) + 5.5242*pow(x,2) - 23.6027*pow(x,1) + 29.2766;
@@ -112,7 +120,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 5701.0<=r && r<5771.0 ) {
-    // transition zone 1
+    // 600 ~ 670 km
 
         *rho= -1.4836*x +  5.3197;
         *vpv= -9.8672*x + 19.0957;
@@ -123,7 +131,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 5771.0<=r && r<5971.0 ) {
-    // transition zone 2
+    // 400 ~ 600 km
 
         *rho=  -8.0298*x + 11.2494;
         *vpv= -32.6166*x + 39.7027;
@@ -134,7 +142,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 5971.0<=r && r<6151.0 ) {
-    // transition zone 3
+    // 220 ~ 400 km
 
         *rho=  -3.8045*x +  7.1089;
         *vpv= -12.2569*x + 20.3926;
@@ -145,7 +153,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 6151.0<=r && r<6291.0 ) {
-    // LVZ
+    // 80 ~ 220 km, LVZ
 
         *rho=  0.6924*x + 2.6910;
         *vpv=  7.2180*x + 0.8317;
@@ -157,7 +165,7 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     }
 
     else if ( 6291.0<=r && r<6346.6 ) {
-    // LID
+    // 24.4 ~ 80 km, LID
 
         *rho=  0.6924*x + 2.6910;
         *vpv=  7.2180*x + 0.8317;
@@ -242,6 +250,42 @@ void prem(double Depth,int iso,int ocean,double *rho,double *vpv,double *vph,dou
     return ;
 }
 
+double d_vs(double Depth){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem(Depth,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return vsv;
+}
+
+double d_vp(double Depth){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem(Depth,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return vpv;
+}
+
+double d_rho(double Depth){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem(Depth,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return rho;
+}
+
+double r_vs(double Radius){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem(6371.0-Radius,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return vsv;
+}
+
+double r_vp(double Radius){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem(6371.0-Radius,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return vpv;
+}
+
+double r_rho(double Radius){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem(6371.0-Radius,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return rho;
+}
+
 
 void prem_smoothed(double Depth,double *rho,double *vpv,double *vph,double *vsv,double *vsh,double *qu,double *qk,double *yita,int RemoveCrust,int Remove220,int Remove400,int Remove670){
 // Inspired from Mike Thorne.
@@ -287,42 +331,6 @@ void prem_smoothed(double Depth,double *rho,double *vpv,double *vph,double *vsv,
 	return;
 }
 
-double d_vs(double Depth){
-    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
-    prem(Depth,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
-    return vsv;
-}
-
-double d_vp(double Depth){
-    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
-    prem(Depth,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
-    return vpv;
-}
-
-double d_rho(double Depth){
-    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
-    prem(Depth,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
-    return rho;
-}
-
-double r_vs(double Radius){
-    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
-    prem(6371.0-Radius,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
-    return vsv;
-}
-
-double r_vp(double Radius){
-    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
-    prem(6371.0-Radius,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
-    return vpv;
-}
-
-double r_rho(double Radius){
-    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
-    prem(6371.0-Radius,1,0,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
-    return rho;
-}
-
 double d_vs_smoothed(double Depth,int RemoveCrust, int Remove220, int Remove400, int Remove670){
     double rho,vpv,vph,vsv,vsh,qu,qk,yita;
     prem_smoothed(Depth,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita,RemoveCrust,Remove220,Remove400,Remove670);
@@ -357,4 +365,59 @@ double r_rho_smoothed(double Radius,int RemoveCrust, int Remove220, int Remove40
     double rho,vpv,vph,vsv,vsh,qu,qk,yita;
     prem_smoothed(6371.0-Radius,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita,RemoveCrust,Remove220,Remove400,Remove670);
     return rho;
+}
+
+void prem_x(double Depth,double *rho,double *vpv,double *vph,double *vsv,double *vsh,double *qu,double *qk,double *yita){
+    prem(Depth,1,0,rho,vpv,vph,vsv,vsh,qu,qk,yita);
+	double x=1-Depth/6371.0;
+	if (Depth<=400) {
+		*vsh=-1147.226569441673*pow(x,3)+3481.648723871561*pow(x,2)-3521.617739418105*x+1191.686592108216;
+		*vsv=*vsh;
+		*rho=734.780041069559*pow(x,3)-2071.193615789281*pow(x,2)+1938.047108369886*x-598.252785440164;
+		*vph=-4.9208884249226*pow(x,3)+274.0496803031463*pow(x,2)-533.3366953315248*x+272.3185207233010;
+		*vpv=*vph;
+	}
+
+	if (600<=Depth && Depth<=1155.674) {
+		*vsh=-84.46554942*x*x+134.4361189*x-46.95411628;
+		*vsv=*vsh;
+	}
+	if (600<=Depth && Depth<=1726.323) {
+		*rho=-13.29902926*x*x+16.06334012*x+0.3373366175;
+	}
+	if (600<=Depth && Depth<=970.426) {
+		*vph=-189.1928756*x*x+310.1340153*x-115.5330402;
+		*vpv=*vph;
+	}
+
+	return;
+}
+double d_vs_x(double Depth){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem_x(Depth,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return vsv;
+}
+
+double d_vp_x(double Depth){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem_x(Depth,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return vpv;
+}
+
+double d_rho_x(double Depth){
+    double rho,vpv,vph,vsv,vsh,qu,qk,yita;
+    prem_x(Depth,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+    return rho;
+}
+
+double r_vs_x(double Radius){
+	return d_vs_x(6371.0-Radius);
+}
+
+double r_vp_x(double Radius){
+	return d_vp_x(6371.0-Radius);
+}
+
+double r_rho_x(double Radius){
+	return d_rho_x(6371.0-Radius);
 }

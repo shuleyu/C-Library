@@ -41,5 +41,15 @@ int main(){
     }
     fclose(fpout);
 
+    fpout=fopen("data/prem_x_out","w");
+    fprintf(fpout,"<Depth>    <Vp>    <Vs>    <Rho>\n");
+    Depth=0;
+    while (Depth<=RE){
+        prem_x(Depth,&rho,&vpv,&vph,&vsv,&vsh,&qu,&qk,&yita);
+        fprintf(fpout,"%10.3lf\t%10.4lf\t%10.4lf\t%10.3lf\n",Depth,vpv,vsv,rho);
+        Depth+=dr;
+    }
+    fclose(fpout);
+
     return 0;
 }

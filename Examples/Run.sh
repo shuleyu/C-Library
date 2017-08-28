@@ -19,6 +19,7 @@ cd ${SRCDIR}
 # ======== Compile c code ========
 
 gcc -Wall -Wimplicit $1 ${INCLUDE} ${LIBDIR} ${LIBs}
+ 
 
 # ======== Run c code ========
 if [ $? -ne 0 ]
