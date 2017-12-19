@@ -35,6 +35,10 @@ int main(){
     // Use function.
     wiginterpd(p,q,npts,pp,qq,NPTS,0);
 
+	double xp=-10,xq;
+	wiginterpd(p,q,npts,&xp,&xq,1,0);
+	printf("%.3lf\n",xq);
+
     // Output result.
     fp=fopen("data/wiginterpd_out_C","w");
     for (count=0;count<NPTS;count++){
