@@ -7,8 +7,8 @@ int main(){
     int    npts,count;
     FILE   *fp;
     double *p,*w;
-// 	char   *infile="data/std_weight_infile";
-	char   *infile="data/std_weight1.0_infile";
+	char   *infile="data/std_weight_infile";
+// 	char   *infile="data/std_weight1.0_infile";
 
     npts=filenr(infile);
     p=(double *)malloc(npts*sizeof(double));

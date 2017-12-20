@@ -1,6 +1,9 @@
 
 /***********************************************************
  * This file declares C functions of libASU_tools.a
+ * I'm migrating these functions to C++ library.
+ * Files with a "Done." as the first line indicate it's
+ * already tranferred to C++ library.
  *
  * Shule Yu
  * Note: Use this file to avoid implicit function define.

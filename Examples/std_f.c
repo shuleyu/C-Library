@@ -24,7 +24,7 @@ int main(){
     fclose(fp);
 
     // Use function.
-    printf("%.8lf\n",std_f(p,npts));
+    printf("%.12lf\n",std_f(p,npts));
     
     return 0;    
 }

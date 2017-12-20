@@ -1,3 +1,5 @@
+// Done. (Use C++ standard library to generate random numbers.)
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>

@@ -1,3 +1,5 @@
+// Done. (Use C++ standard library to binary search.)
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
