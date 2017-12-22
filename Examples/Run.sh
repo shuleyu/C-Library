@@ -28,6 +28,6 @@ then
     exit 1
 fi
 
-./a.out
+time ./a.out
 
 exit 0

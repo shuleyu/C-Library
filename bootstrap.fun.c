@@ -1,4 +1,4 @@
-// Marker.
+// Done.
 
 #include<stdio.h>
 #include<stdlib.h>
@@ -33,6 +33,7 @@
 
 void bootstrap(double **p, int nptsx, int nptsy, int BootNum, double *avr, double *sigma, double **Boot, int flag_weight, double *w){
 
+
     int    count,count2,*shift=NULL,*choose;
     double **data,*weight;
 
@@ -46,6 +47,8 @@ void bootstrap(double **p, int nptsx, int nptsy, int BootNum, double *avr, doubl
 
     // Stack and get weighted mean for each resamples.
     for (count=0;count<BootNum;count++){
+
+
         for (count2=0;count2<nptsx;count2++){
             data[count2]=p[choose[count*nptsx+count2]];
             if (flag_weight==1){

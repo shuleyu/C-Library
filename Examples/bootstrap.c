@@ -12,10 +12,10 @@ int main(){
 
     BootNum=5000;
     nptsy=100;
-	w=NULL;
 
     strcpy(tmpstr,"data/bootstrap_in");
     nptsx=filenr(tmpstr);
+    w=(double *)malloc(nptsx*sizeof(double));
 
     // Malloc space.
     p=(double **)malloc(nptsx*sizeof(double *));
@@ -37,12 +37,13 @@ int main(){
         for (count2=0;count2<nptsy;count2++){
             fscanf(fp,"%lf",&p[count][count2]);
         }
+		w[count]=p[count][0];
     }
     fclose(fp);
 
 
     // Use function.
-    bootstrap(p,nptsx,nptsy,BootNum,avr,sigma,Boot,0,w);
+    bootstrap(p,nptsx,nptsy,BootNum,avr,sigma,Boot,1,w);
 
     // Output.
     fp=fopen("data/bootstrap_out","w");
