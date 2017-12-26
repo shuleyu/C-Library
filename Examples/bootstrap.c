@@ -43,7 +43,7 @@ int main(){
 
 
     // Use function.
-    bootstrap(p,nptsx,nptsy,BootNum,avr,sigma,Boot,1,w);
+    bootstrap(p,nptsx,nptsy,BootNum,avr,sigma,Boot,0,w);
 
     // Output.
     fp=fopen("data/bootstrap_out","w");

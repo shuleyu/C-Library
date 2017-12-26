@@ -5,11 +5,15 @@
 int main(){
 
     double r,theta,phi;
-    double x,y,z;
 
+    double x,y,z;
     x=19.12;
     y=12.3;
     z=23.34;
+
+//     x=19;
+//     y=12;
+//     z=23;
 
     // Use function.
     cart2sph(x,y,z,&r,&phi,&theta);
