@@ -1,3 +1,5 @@
+// Done.
+
 #include<stdlib.h>
 #include<math.h>
 #include<ASU_tools.h>
@@ -29,7 +31,7 @@ void cbin_update(double *plon, double *plat, int N, double *blon, double *blat, 
     // Judge each trace.
     for (count=0;count<N;count++){
         for (count2=0;count2<M;count2++){
-            if (gcpdistance(plon[count],plat[count],blon[count2],blat[count2])<radius[count2]){
+            if (gcpdistance(plon[count],plat[count],blon[count2],blat[count2])<=radius[count2]){
                 index[count][count2]=1;
             }
             else{
