@@ -25,8 +25,14 @@ int main(){
     }
     fclose(fpin);
 
+// 	double x[5]={0,1,2,3,4},y[4]={2,4,6,8};
+// 	int xnpts=5,ynpts=4;
+// 	int shift;
+// 	double ccc,dt=1;	
+
     // Use function.
-    CC(x,xnpts,y,ynpts,&shift,&ccc);
+//     for (int i=0;i<1000;++i)
+	CC(x,xnpts,y,ynpts,&shift,&ccc);
     printf("Shift: %d\nShift_time: %.2lf\nCCC: %.3lf\n",shift,shift*dt,ccc);
 
     fpout=fopen("data/cc_out","w");

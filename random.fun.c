@@ -1,4 +1,5 @@
 // Done. (Use C++ standard library to generate random numbers.)
+// See Bootstrap.hpp in the C++ library.
 
 #include<stdio.h>
 #include<stdlib.h>

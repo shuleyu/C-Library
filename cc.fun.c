@@ -1,3 +1,5 @@
+// Done.
+
 #include<stdio.h>
 #include<math.h>
 #include<ASU_tools.h>
@@ -23,7 +25,9 @@
  *
  *           sum of x*y of the overlapping part
  *    CCC = -------------------------------------
- *            sqrt(sum of x^2)*sqrt(sum of y^2)
+ *            sqrt( (sum of x^2)*(sum of y^2) )
+ *
+ * Note: We remove the average of input signal before any calculation.
  *
  * (for CC_positive:)
  * Use CCC to replace |CCC|. (No flipping.)
@@ -43,7 +47,7 @@
  *
  *           sum of x*y of the overlapping part * sqrt ( min( xx, yy ) )
  *    CCC = ---------------------------------------------------------------
- *            sqrt(sum of x^2)*sqrt(sum of y^2) * sqrt ( max (xx, yy ) )
+ *            sqrt( (sum of x^2)*(sum of y^2) ) * sqrt ( max (xx, yy ) )
  *
  * 		xx = sum of x^2
  * 		yy = sum of y^2
@@ -104,14 +108,25 @@ int CC(double *x, int xlen, double *y, int ylen, int *shift, double *CCC){
         return 1;
     }
 
+	// Calculate x average and y average.
+	double avrx=0,avry=0;
+    for (count=0;count<xlen;count++){
+		avrx+=x[count];
+	}
+	avrx/=xlen;
+    for (count=0;count<ylen;count++){
+		avry+=y[count];
+	}
+	avry/=ylen;
+
     // Denominator.
     xx=0;
     yy=0;
     for (count=0;count<xlen;count++){
-        xx+=pow(x[count],2);
+        xx+=pow(x[count]-avrx,2);
     }
     for (count=0;count<ylen;count++){
-        yy+=pow(y[count],2);
+        yy+=pow(y[count]-avry,2);
     }
     if ( sqrt(xx)< 1e-30 || sqrt(yy)< 1e-30 ){
         printf("In %s: Energy is zero !\n",__func__);
@@ -127,7 +142,7 @@ int CC(double *x, int xlen, double *y, int ylen, int *shift, double *CCC){
 
         R=0;
         for (count=xBegin;count<xEnd;count++){
-            R+=x[count]*y[count-tau];
+            R+=(x[count]-avrx)*(y[count-tau]-avry);
         }
         if ( fabs(*CCC)<fabs(R) ){
             *CCC=R;
@@ -155,14 +170,25 @@ int CC_positive(double *x, int xlen, double *y, int ylen, int *shift, double *CC
         return 1;
     }
 
+	// Calculate x average and y average.
+	double avrx=0,avry=0;
+    for (count=0;count<xlen;count++){
+		avrx+=x[count];
+	}
+	avrx/=xlen;
+    for (count=0;count<ylen;count++){
+		avry+=y[count];
+	}
+	avry/=ylen;
+
     // Denominator.
     xx=0;
     yy=0;
     for (count=0;count<xlen;count++){
-        xx+=pow(x[count],2);
+        xx+=pow(x[count]-avrx,2);
     }
     for (count=0;count<ylen;count++){
-        yy+=pow(y[count],2);
+        yy+=pow(y[count]-avry,2);
     }
     if ( sqrt(xx)< 1e-30 || sqrt(yy)< 1e-30 ){
         printf("In %s: Energy is zero !\n",__func__);
@@ -178,7 +204,7 @@ int CC_positive(double *x, int xlen, double *y, int ylen, int *shift, double *CC
 
         R=0;
         for (count=xBegin;count<xEnd;count++){
-            R+=x[count]*y[count-tau]*polarity;
+            R+=(x[count]-avrx)*(y[count-tau]-avry)*polarity;
         }
         if ( *CCC<R ){
             *CCC=R;
@@ -206,14 +232,25 @@ int CC_trace(double *x, int xlen, double *y, int ylen, int *shift, double *CCC, 
         return 1;
     }
 
+	// Calculate x average and y average.
+	double avrx=0,avry=0;
+    for (count=0;count<xlen;count++){
+		avrx+=x[count];
+	}
+	avrx/=xlen;
+    for (count=0;count<ylen;count++){
+		avry+=y[count];
+	}
+	avry/=ylen;
+
     // Denominator.
     xx=0;
     yy=0;
     for (count=0;count<xlen;count++){
-        xx+=pow(x[count],2);
+        xx+=pow(x[count]-avrx,2);
     }
     for (count=0;count<ylen;count++){
-        yy+=pow(y[count],2);
+        yy+=pow(y[count]-avry,2);
     }
     if ( sqrt(xx)< 1e-30 || sqrt(yy)< 1e-30 ){
         printf("In %s: Energy is zero !\n",__func__);
@@ -229,7 +266,7 @@ int CC_trace(double *x, int xlen, double *y, int ylen, int *shift, double *CCC, 
 
         result[ylen-1+tau]=0;
         for (count=xBegin;count<xEnd;count++){
-            result[ylen-1+tau]+=x[count]*y[count-tau];
+            result[ylen-1+tau]+=(x[count]-avrx)*(y[count-tau]-avry);
         }
         if ( fabs(*CCC)<fabs(result[ylen-1+tau]) ){
             *CCC=result[ylen-1+tau];
@@ -256,14 +293,25 @@ int CC_static(double *x, int xlen, double *y, int ylen, double *CCC){
         return 1;
     }
 
+	// Calculate x average and y average.
+	double avrx=0,avry=0;
+    for (count=0;count<xlen;count++){
+		avrx+=x[count];
+	}
+	avrx/=xlen;
+    for (count=0;count<ylen;count++){
+		avry+=y[count];
+	}
+	avry/=ylen;
+
     // Denominator.
     xx=0;
     yy=0;
     for (count=0;count<xlen;count++){
-        xx+=pow(x[count],2);
+        xx+=pow(x[count]-avrx,2);
     }
     for (count=0;count<ylen;count++){
-        yy+=pow(y[count],2);
+        yy+=pow(y[count]-avry,2);
     }
     if ( sqrt(xx)< 1e-30 || sqrt(yy)< 1e-30 ){
         printf("In %s: Energy is zero !\n",__func__);
@@ -276,7 +324,7 @@ int CC_static(double *x, int xlen, double *y, int ylen, double *CCC){
 
     (*CCC)=0;
     for (count=0;count<xEnd;count++){
-        (*CCC)+=x[count]*y[count];
+        (*CCC)+=(x[count]-avrx)*(y[count]-avry);
     }
 
     (*CCC)/=energy;
@@ -298,14 +346,25 @@ int CC_static_energy(double *x, int xlen, double *y, int ylen, double *CCC){
         return 1;
     }
 
+	// Calculate x average and y average.
+	double avrx=0,avry=0;
+    for (count=0;count<xlen;count++){
+		avrx+=x[count];
+	}
+	avrx/=xlen;
+    for (count=0;count<ylen;count++){
+		avry+=y[count];
+	}
+	avry/=ylen;
+
     // Denominator.
     xx=0;
     yy=0;
     for (count=0;count<xlen;count++){
-        xx+=pow(x[count],2);
+        xx+=pow(x[count]-avrx,2);
     }
     for (count=0;count<ylen;count++){
-        yy+=pow(y[count],2);
+        yy+=pow(y[count]-avry,2);
     }
     if ( sqrt(xx)< 1e-30 || sqrt(yy)< 1e-30 ){
         printf("In %s: Energy is zero !\n",__func__);
@@ -318,7 +377,7 @@ int CC_static_energy(double *x, int xlen, double *y, int ylen, double *CCC){
 
     (*CCC)=0;
     for (count=0;count<xEnd;count++){
-        (*CCC)+=x[count]*y[count];
+        (*CCC)+=(x[count]-avrx)*(y[count]-avry);
     }
 
     (*CCC)*=(sqrt(fmin(xx,yy)/fmax(xx,yy))/energy);
@@ -341,14 +400,25 @@ int CC_limitshift(double *x, int xlen, double *y, int ylen, int *shift, double *
         return 1;
     }
 
+	// Calculate x average and y average.
+	double avrx=0,avry=0;
+    for (count=0;count<xlen;count++){
+		avrx+=x[count];
+	}
+	avrx/=xlen;
+    for (count=0;count<ylen;count++){
+		avry+=y[count];
+	}
+	avry/=ylen;
+
     // Denominator.
     xx=0;
     yy=0;
     for (count=0;count<xlen;count++){
-        xx+=pow(x[count],2);
+        xx+=pow(x[count]-avrx,2);
     }
     for (count=0;count<ylen;count++){
-        yy+=pow(y[count],2);
+        yy+=pow(y[count]-avry,2);
     }
     if ( sqrt(xx)< 1e-30 || sqrt(yy)< 1e-30 ){
         printf("In %s: Energy is zero !\n",__func__);
@@ -366,7 +436,7 @@ int CC_limitshift(double *x, int xlen, double *y, int ylen, int *shift, double *
 
         R=0;
         for (count=xBegin;count<xEnd;count++){
-            R+=x[count]*y[count-tau];
+            R+=(x[count]-avrx)*(y[count-tau]-avry);
         }
         if ( fabs(*CCC)<fabs(R) ){
             *CCC=R;
