@@ -32,6 +32,21 @@ int main(){
         pp[count]=p[0]+dt*count;
     }
 
+// 	p=(double *)malloc(5*sizeof(double));
+// 	q=(double *)malloc(5*sizeof(double));
+// 	pp=(double *)malloc(3*sizeof(double));
+// 	qq=(double *)malloc(3*sizeof(double));
+// 	npts=5,NPTS=3;
+// 
+// 	p[0]=4; q[0]=4;
+// 	p[1]=3; q[1]=3;
+// 	p[2]=2; q[2]=2;
+// 	p[3]=1; q[3]=1;
+// 	p[4]=0; q[4]=0;
+// 	pp[0]=1.5;
+// 	pp[1]=2.5;
+// 	pp[2]=3.5;
+
     // Use function.
     wiginterpd(p,q,npts,pp,qq,NPTS,0);
 

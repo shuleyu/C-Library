@@ -1,3 +1,5 @@
+// Done.
+
 #include<math.h>
 #include<gsl/gsl_cdf.h>
 #include<ASU_tools.h>
@@ -24,16 +26,7 @@ void confidence(double *p, int npts, double *r,double level){
         return;
     }
 
-    int    count;
-    double s,m;
-
-    m=mean_d(p,npts);
-
-    s=0;
-    for (count=0;count<npts;count++){
-        s+=pow((p[count]-m),2);
-    }
-    s=sqrt(1.0*s/(npts-1));
+    double s=std_d(p,npts);
 
     (*r)=gsl_cdf_tdist_Pinv(1-(1-level)/2,npts-1)*s/sqrt(npts);
 

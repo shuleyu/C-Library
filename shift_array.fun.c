@@ -20,7 +20,7 @@
  * Shule Yu
  * Sept 21 2014
  *
- * Note: original data destroied.
+ * Note: original data destroyed.
  *
  * Key words: shift.
 ***********************************************************/

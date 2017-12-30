@@ -1,3 +1,7 @@
+// Done.
+// Ues standard libaray funciton accumulate:
+// Sum=accumulate(A.begin(),A.end(),0.0);
+
 #include<stdio.h>
 #include<ASU_tools.h>
 
