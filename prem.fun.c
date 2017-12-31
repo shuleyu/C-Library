@@ -1,9 +1,11 @@
+// Done.
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
 #include<ASU_tools.h>
 
-// 14 functions
+// 21 functions
 // prem
 // d_vs
 // d_vp

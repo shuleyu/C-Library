@@ -15,7 +15,7 @@
  * Shule Yu
  * May 15 2014
  *
- * Key words: geography, coordinates, convertion.
+ * Key words: ray parameter, take off angle.
 ***********************************************************/
 
 double rayp2takeoff(double rayp,double depth,int phase){
