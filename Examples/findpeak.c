@@ -10,14 +10,13 @@ int main(){
 	random_num(p,npts);
 
     // Use function.
+    printf("Widow: %d ~ %d\n",Peak-10,Peak+10);
 	findpeak(p,100,&Peak,-10,20);
     printf("Peak is at: %d\n",Peak);
 
-	for (count=40;count<60;count++){
+	for (count=35;count<65;count++){
 		printf("%d\t%.4lf\n",count,p[count]);
 	}
-
-
 
     return 0;
 }
