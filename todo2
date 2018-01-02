@@ -1,5 +1,3 @@
-68 gaussian.fun.c
-52 gaussblur.fun.c
 53 graycode.fun.c
 36 envelope_hilbert.fun.c
 61 redirection.fun.c
