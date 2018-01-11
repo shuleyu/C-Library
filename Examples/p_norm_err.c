@@ -9,9 +9,9 @@ int main(){
     x[1]=1.1;
     x[2]=2.1;
 
-    y[0]=0.1;
-    y[1]=2.1;
-    y[2]=0.1;
+    y[0]=0;
+    y[1]=1;
+    y[2]=2;
 
     // Use function.
     printf("%.10lf\n",p_norm_err(x,y,3,2));

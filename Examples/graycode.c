@@ -7,7 +7,7 @@ int main(){
 
     int   Bit,**Ans,Cnt,Cnt2,Break;
 
-	Bit=3;
+	Bit=5;
 	Break=8;
 
 	Ans=(int **)malloc(pow(2,Bit)*sizeof(int *));

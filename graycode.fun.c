@@ -1,10 +1,9 @@
+// Done.
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>
 #include<ASU_tools.h>
-
-// 1 functions:
-// graycode
 
 /***********************************************************
  * This C function returns gray code for given bit number.
