@@ -25,6 +25,8 @@ gcc -Wall -Wimplicit $1 ${INCLUDE} ${LIBDIR} ${LIBs}
 # ======== Run c code ========
 
 time ./a.out
+echo ""
+
 rm -f a.out
 
 exit 0

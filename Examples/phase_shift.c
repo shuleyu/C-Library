@@ -18,9 +18,11 @@ int main(){
     hilbert=(double *)malloc(NPTS*sizeof(double));
 
     // Make signal.
-    for (count=0;count<NPTS/2;count++){
-        gauss[count]=gaussian(-(NPTS/2-0.5-count)*delta,sigma,0);
-        gauss[NPTS-1-count]=gauss[count];
+    gauss[0]=gaussian(-NPTS/2*delta,sigma,0);
+    gauss[NPTS/2]=gaussian(0,sigma,0);
+    for (count=1;count<NPTS/2;count++){
+        gauss[count]=gaussian(-(NPTS/2-count)*delta,sigma,0);
+        gauss[NPTS-count]=gauss[count];
     }
     normalized(gauss,NPTS);
 
