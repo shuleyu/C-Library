@@ -7,11 +7,11 @@ int main(){
 
     double evlo,evla,az,dist,plo,pla;
 
-    evlo=-71.2071;
-    evla=-8.0859;
+    evlo=0;
+    evla=0;
 
     dist=100;
-    az=340;
+    az=90;
 
     // Use function.
     waypoint_az(evlo,evla,az,dist,&plo,&pla);

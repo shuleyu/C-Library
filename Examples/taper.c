@@ -18,7 +18,7 @@ int main(){
     fclose(fp);
 
     // Use function.
-    taper(p,npts,0.05);
+    taper(p,npts,0.0499);
 
     fp=fopen("data/taper_out","w");
     for (count=0;count<npts;count++){

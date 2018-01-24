@@ -1,3 +1,5 @@
+// Use C++ STL function min_element(), max_element();
+
 #include<stdio.h>
 #include<stdlib.h>
 #include<ASU_tools.h>

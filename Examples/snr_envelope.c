@@ -20,7 +20,7 @@ int main(){
     fclose(fpin);
 
     for (count=0;count<4;count++){
-        printf("Trace %d: %.4lf\n",count+1,snr_envelope(amp[count],1000,126,375,625,250));
+        printf("Trace %d: %.4lf\n",count+1,snr_envelope(amp[count],1000,126,375,625,251));
     }
 
     return 0;

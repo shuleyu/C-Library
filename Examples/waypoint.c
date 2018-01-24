@@ -6,13 +6,13 @@ int main(){
 
     double evlo,evla,stlo,stla,dist,plo,pla;
 
-    evlo=-178.09;
-	evla=-30.22;
+    evlo=30;
+	evla=30;
 
-	stlo=39.4188;
-	stla=8.9285;
+	stlo=35;
+	stla=8;
 
-    dist=21.73;
+    dist=5;
 
     // Use function.
     waypoint(evlo,evla,stlo,stla,dist,&plo,&pla);

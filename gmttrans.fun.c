@@ -14,7 +14,7 @@
  * int              ny    ----  y size.
  * int/float/double *pp   ----  GMT adapted 2D grid. (1 by [nx+pad[0]+pad[1]] * [ny+pad[2]+pad[3]])
  * int              *pad  ----  padding. Here I only figure out the longitude direction
- * 										 periodic BC. Will take incorrect grid as a coorect grid:
+ * 										 periodic BC. Will take incorrect grid as a correct grid:
  *
  * 								if pad={1,2,3,4}:
  * 								    	W E S N
