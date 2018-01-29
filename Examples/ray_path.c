@@ -25,7 +25,7 @@ int main(int argc, char **argv){
         Velocity[count]=r_vs(Radius[count]);
     }
 
-    rayp=(6371.0-dmin)*sin(0*M_PI/180)/d_vs(dmin);
+    rayp=(6371.0-dmin)*sin(30*M_PI/180)/d_vs(dmin);
 
     flag=ray_path(rayp,NPTS,Radius,Velocity,dmin,dmax,89.9,&traveltime,&traveldistance,deg,radius,&npts);
 
@@ -39,7 +39,9 @@ int main(int argc, char **argv){
         printf("Ray turns !\n");
     }
 
+	printf("Rayp      : %.3lf\n",rayp/180*M_PI);
 	printf("TravelTime: %.3lf\n",traveltime);
+	printf("Pursuit   : %.3lf\n",traveldistance);
 
     free(Radius);
     free(Velocity);
