@@ -32,7 +32,7 @@
  *                            Data length (in sec.) is (nptsy-1)*delta.
  * (for read_sac_fixdel:)
  * double *delta        ----  This fixdel is a little strange. It require all SAC file has
- * 							  the same sampling rate (usually this is used on synthesis).
+ * 							  the same sampling rate (usually this is used on synthetics).
  * 							  The only difference from read_sac is that no interpolation
  * 							  happens in this one. Input delta should approximate the one
  * 							  in SAC files to ensure the data length read in is correct,

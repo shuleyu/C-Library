@@ -23,7 +23,7 @@ int main(){
 
 
     // Find length of traces.
-    NPTS_struct=(int)((2+2*ulvzarrival)/delta);
+    NPTS_struct=(int)((5+2*ulvzarrival)/delta);
     NPTS_source=1+2*(int)ceil(gwidth/2/delta);
     NPTS_signal=NPTS_struct+NPTS_source-1;
     NPTS_decon=(NPTS_signal>=NPTS_source)?(2*NPTS_signal):(2*NPTS_source);

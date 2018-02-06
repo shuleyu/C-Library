@@ -1,13 +1,13 @@
 
-/***********************************************************
+/************************************************************
  * This file declares C functions of libASU_tools.a
- * I'm migrating these functions to C++ library.
- * Files with a "Done." as the first line indicate it's
- * already tranferred to C++ library.
+ * I'm migrating these functions to a C++ library.
+ * Most of these functions are covered either in CPP standard
+ * library or in my C++ library.
  *
  * Shule Yu
- * Note: Use this file to avoid implicit function define.
-***********************************************************/
+************************************************************/
+
 #ifndef ASU_TOOLS_H
 #define ASU_TOOLS_H
 
