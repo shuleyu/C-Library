@@ -1,7 +1,3 @@
-// Done. deprecated.
-// Because C++ use vector and thus have a much better way to handle
-// memory allocation, this function is rarely uesd in C++ programs.
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<ASU_tools.h>

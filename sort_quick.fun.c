@@ -1,5 +1,3 @@
-// Done. Use standard library sort function.
-
 #include<ASU_tools.h>
 
 // 2 functions

@@ -1,6 +1,3 @@
-// Done.
-// Use C++ standard library "rotate".
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<ASU_tools.h>

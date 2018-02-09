@@ -1,5 +1,3 @@
-// Done. Use the standard library funciton accumulate.
-
 #include<ASU_tools.h>
 
 // 2 functions:

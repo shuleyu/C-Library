@@ -1,4 +1,3 @@
-// Done.
 // Use this command instead of this function.
 // taup_path -mod prem -h 500 -ph S -evt 0 0 -sta 34 53 -o stdout | grep -v ">" | sort -g -k2 |  head -n 1
 

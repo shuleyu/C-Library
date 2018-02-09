@@ -1,5 +1,3 @@
-// Done.
-
 #include<math.h>
 #include<gsl/gsl_cdf.h>
 #include<ASU_tools.h>

@@ -1,5 +1,3 @@
-// Done.
-
 #include<stdio.h>
 #include<math.h>
 #include<ASU_tools.h>
@@ -34,7 +32,7 @@ void findpeak(double *p, int npts, int *Peak, int WB, int WL){
 	}
 
     int count;
-	double AMP=p[*Peak+WB];
+	double AMP=fabs(p[*Peak]);
     for (count=*Peak+WB;count<=End;count++){
         if (AMP<fabs(p[count])){
             AMP=fabs(p[count]);

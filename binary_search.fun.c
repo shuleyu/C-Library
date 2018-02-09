@@ -1,7 +1,3 @@
-// Done.
-// Use C++ standard library to binary search.
-// std::upper_bound() or std::lower_bound()
-
 #include<stdio.h>
 #include<stdlib.h>
 #include<math.h>

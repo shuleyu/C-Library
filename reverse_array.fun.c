@@ -1,6 +1,3 @@
-// Done. Use standard library function reverse():
-// std::reverse(A.begin(),A.end());
-
 #include<stdio.h>
 #include<ASU_tools.h>
 
