@@ -20,7 +20,7 @@ cd ${SRCDIR}
 
 # ======== Compile c code ========
 
-gcc -Wall -Wimplicit $1 ${INCLUDE} ${LIBDIR} ${LIBs}
+gcc -fPIC -Wall -Wimplicit $1 ${INCLUDE} ${LIBDIR} ${LIBs}
  
 # ======== Run c code ========
 

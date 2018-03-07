@@ -1,6 +1,6 @@
 
 CC = gcc
-FLAGS = -Wall -Wimplicit
+FLAGS = -Wall -Wimplicit -fPIC
 COMP = $(CC) $(FLAGS)
 
 SACHOME = /usr/local/sac
