@@ -34,7 +34,7 @@ libASU_tools.a: $(OBJS)
 %.o: %.c
 	$(COMP) -MMD -MP -c $< -o $@ $(INCDIR)
 
-$(EGDIR)/%.out: $(EGDIR)/%.o
+$(EGDIR)/%.out: $(EGDIR)/%.c
 	$(COMP) -MMD -MP $< -o $@ $(INCDIR) $(LIBDIR) $(LIBS)
 
 clean:
