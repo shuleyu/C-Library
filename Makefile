@@ -38,4 +38,4 @@ $(EGDIR)/%.out: $(EGDIR)/%.c
 	$(COMP) -MMD -MP $< -o $@ $(INCDIR) $(LIBDIR) $(LIBS)
 
 clean:
-	rm -f *.d *.o libASU_tools.a $(EGDIR)/*.d $(EGDIR)/*.out $(EGDIR)/*.o
+	rm -f *.d *.o libASU_tools.a $(EGDIR)/*.d $(EGDIR)/*.out
