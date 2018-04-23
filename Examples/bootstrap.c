@@ -37,7 +37,7 @@ int main(){
         for (count2=0;count2<nptsy;count2++){
             fscanf(fp,"%lf",&p[count][count2]);
         }
-		w[count]=p[count][0];
+        w[count]=p[count][0];
     }
     fclose(fp);
 
@@ -48,10 +48,10 @@ int main(){
     // Output.
     fp=fopen("data/bootstrap_out","w");
     for (count=0;count<nptsy;count++){
-		for (count2=0;count2<BootNum;count2++){
+        for (count2=0;count2<BootNum;count2++){
             fprintf(fp,"%.6e\t",Boot[count2][count]);
         }
-		fprintf(fp,"\n");
+        fprintf(fp,"\n");
     }
     fclose(fp);
 

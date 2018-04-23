@@ -39,12 +39,12 @@ void gaussblur_1d(double **p,int nptsx,int nptsy,double delta,double sigma,doubl
 
     // Convolve signal with guassian function.
     // Truncate the smoothed array into original size.
-	for (count=0;count<nptsx;count++){
-		convolve(p[count],gauss,nptsy,NPTS_Gauss,tmp);
-		for (count2=0;count2<nptsy;count2++){
-			ans[count][count2]=tmp[count2+NPTS_Gauss/2];
-		}
-	}
+    for (count=0;count<nptsx;count++){
+        convolve(p[count],gauss,nptsy,NPTS_Gauss,tmp);
+        for (count2=0;count2<nptsy;count2++){
+            ans[count][count2]=tmp[count2+NPTS_Gauss/2];
+        }
+    }
 
     free(gauss);
     free(tmp);

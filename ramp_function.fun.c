@@ -26,22 +26,22 @@ double ramp_function(double x, double c1, double c2){
         printf("In %s: c1 > c2 ...",__func__);
         exit(1);
     }
-	else if (c1==c2){
-		if (x>c2){
-			return 1.0;
-		}
-		else{
-			return 0.0;
-		}
-	}
+    else if (c1==c2){
+        if (x>c2){
+            return 1.0;
+        }
+        else{
+            return 0.0;
+        }
+    }
 
-	else{
-		if (x>=c2){
-			return 1.0;
-		}
-		if (x<=c1){
-			return 0.0;
-		}
-		return (x-c1)/(c2-c1);
-	}
+    else{
+        if (x>=c2){
+            return 1.0;
+        }
+        if (x<=c1){
+            return 0.0;
+        }
+        return (x-c1)/(c2-c1);
+    }
 }

@@ -11,23 +11,23 @@ int main(){
     // Use function.
     convolve(a,b,5,2,c);
 
-	printf("A:  ");
+    printf("A:  ");
     for (count=0;count<5;count++){
         printf("%lf\t",a[count]);
     }
-	printf("\n");
+    printf("\n");
 
-	printf("B:  ");
+    printf("B:  ");
     for (count=0;count<2;count++){
         printf("%lf\t",b[count]);
     }
-	printf("\n");
+    printf("\n");
 
-	printf("C:  ");
+    printf("C:  ");
     for (count=0;count<6;count++){
         printf("%lf\t",c[count]);
     }
-	printf("\n");
+    printf("\n");
 
     return 0;
 }

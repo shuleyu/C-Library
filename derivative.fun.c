@@ -31,9 +31,9 @@ void derivative(double *p, int npts, double *pp){
     }
 
     for (int count=0;count<npts-1;count++){
-		pp[count]=p[count+1]-p[count];
+        pp[count]=p[count+1]-p[count];
     }
-	pp[npts-1]=pp[npts-2];
+    pp[npts-1]=pp[npts-2];
 
     return;
 }
@@ -46,9 +46,9 @@ void derivative_f(float *p, int npts, double *pp){
     }
 
     for (int count=0;count<npts-1;count++){
-		pp[count]=p[count+1]-p[count];
+        pp[count]=p[count+1]-p[count];
     }
-	pp[npts-1]=pp[npts-2];
+    pp[npts-1]=pp[npts-2];
 
     return;
 }

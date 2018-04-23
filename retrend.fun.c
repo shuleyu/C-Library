@@ -97,19 +97,19 @@ void retrendd(double xbegin,double *data,int npts,double delta){
 
 void linear_fitting(double *x,double *y,int npts,double *slope,double *intcpt){
 
-	if (npts<=1){
+    if (npts<=1){
         printf("In %s: NPTS too small ...\n",__func__);
-		return;
-	}
+        return;
+    }
 
     int    count;
     double avx,sumx2,sumy,sumxy;
 
     avx=0;
     for (count=0;count<npts;count++){
-		avx+=x[count];
-	}
-	avx/=npts;
+        avx+=x[count];
+    }
+    avx/=npts;
 
     sumx2=0;
     sumy=0;
@@ -124,5 +124,5 @@ void linear_fitting(double *x,double *y,int npts,double *slope,double *intcpt){
     *slope=(sumxy-sumy*avx)/(sumx2-npts*pow(avx,2));
     *intcpt=sumy/npts-(*slope)*avx;
 
-	return;
+    return;
 }

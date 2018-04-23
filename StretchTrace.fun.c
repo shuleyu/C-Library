@@ -42,47 +42,47 @@ void StretchTrace(double *p, int npts, int Peak, double Hor, double Ver, double 
         return;
     }
 
-	int index,T1=0,T2=npts;
+    int index,T1=0,T2=npts;
 
-	double *time_old,*time_new,*amp_new;
-	time_old=(double *)malloc(npts*sizeof(double));
-	time_new=(double *)malloc(npts*sizeof(double));
-	amp_new=(double *)malloc(npts*sizeof(double));
-	for (index=0;index<npts;index++){
-		time_old[index]=(index-Peak)*delta;
-		time_new[index]=time_old[index]/Hor;
-		if(time_new[index]<time_old[0]){
-			T1=index+1;
-		}
-		if(T2==npts && time_new[index]>(npts-1-Peak)*delta){
-			T2=index;
-		}
-	}
+    double *time_old,*time_new,*amp_new;
+    time_old=(double *)malloc(npts*sizeof(double));
+    time_new=(double *)malloc(npts*sizeof(double));
+    amp_new=(double *)malloc(npts*sizeof(double));
+    for (index=0;index<npts;index++){
+        time_old[index]=(index-Peak)*delta;
+        time_new[index]=time_old[index]/Hor;
+        if(time_new[index]<time_old[0]){
+            T1=index+1;
+        }
+        if(T2==npts && time_new[index]>(npts-1-Peak)*delta){
+            T2=index;
+        }
+    }
 
-	if (Hor!=1){
-		wiginterpd(time_old,p,npts,time_new+T1,amp_new+T1,T2-T1,0);
-	}
-	else{
-		for (index=0;index<npts;index++) amp_new[index]=p[index];
-	}
+    if (Hor!=1){
+        wiginterpd(time_old,p,npts,time_new+T1,amp_new+T1,T2-T1,0);
+    }
+    else{
+        for (index=0;index<npts;index++) amp_new[index]=p[index];
+    }
 
-	double AMP=p[Peak];
-	for (index=T1;index<T2;index++){
-		pp[index]=amp_new[index]/AMP;
-		pp[index]=(pp[index]+Ver)/(1+Ver);
-		pp[index]=pp[index]*AMP;
-	}
+    double AMP=p[Peak];
+    for (index=T1;index<T2;index++){
+        pp[index]=amp_new[index]/AMP;
+        pp[index]=(pp[index]+Ver)/(1+Ver);
+        pp[index]=pp[index]*AMP;
+    }
 
-	for (index=0;index<T1;index++){
-		pp[index]=pp[T1];
-	}
-	for (index=T2;index<npts;index++){
-		pp[index]=pp[T2-1];
-	}
+    for (index=0;index<T1;index++){
+        pp[index]=pp[T1];
+    }
+    for (index=T2;index<npts;index++){
+        pp[index]=pp[T2-1];
+    }
 
-	free(time_old);
-	free(time_new);
-	free(amp_new);
+    free(time_old);
+    free(time_new);
+    free(amp_new);
 
-	return;
+    return;
 }

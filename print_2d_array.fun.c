@@ -21,13 +21,13 @@
 
 void print_2d_array_f(float *p, int nx, int ny){
 
-	int Cnt,Cnt2=0;
-	for (Cnt=ny-1;Cnt>=0;Cnt--){
-		for (Cnt2=0;Cnt2<nx;Cnt2++){
-			printf("%.2f\t",p[Cnt2*ny+Cnt]);
-		}
-		printf("\n");
-	}
+    int Cnt,Cnt2=0;
+    for (Cnt=ny-1;Cnt>=0;Cnt--){
+        for (Cnt2=0;Cnt2<nx;Cnt2++){
+            printf("%.2f\t",p[Cnt2*ny+Cnt]);
+        }
+        printf("\n");
+    }
 
-	return;
+    return;
 }

@@ -86,8 +86,8 @@ int ray_path(double rayp, int NPTS, double *r, double *v, double mindepth,double
             break;
         }
 
-		dist=r[count+1]/C*D;
-		if (isnan(dist)) sphdist(0,0,r[count],asin(D)*180/M_PI,0,r[count+1],&dist);
+        dist=r[count+1]/C*D;
+        if (isnan(dist)) sphdist(0,0,r[count],asin(D)*180/M_PI,0,r[count+1],&dist);
 
         // Store result of this step.
         (*t)+=dist/v[count];

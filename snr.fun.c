@@ -37,14 +37,14 @@ double snr_envelope(double *p, int npts,int nloc,int nlen,int sloc,int slen){
     int    count;
     double Slevel,Nlevel,*enveloped_p;
 
-	if (nloc<0 || nloc>npts || nlen<0 || nloc+nlen>npts){
-		printf("In %s: Noise window error ...\n",__func__);
-		return 0.0;
-	}
-	if (sloc<0 || sloc>npts || slen<0 || sloc+slen>npts){
-		printf("In %s: Signal window error ...\n",__func__);
-		return 0.0;
-	}
+    if (nloc<0 || nloc>npts || nlen<0 || nloc+nlen>npts){
+        printf("In %s: Noise window error ...\n",__func__);
+        return 0.0;
+    }
+    if (sloc<0 || sloc>npts || slen<0 || sloc+slen>npts){
+        printf("In %s: Signal window error ...\n",__func__);
+        return 0.0;
+    }
 
     enveloped_p=(double *)malloc(npts*sizeof(double));
     envelope_hilbert(p,npts,enveloped_p);
@@ -72,14 +72,14 @@ double snr_envelope(double *p, int npts,int nloc,int nlen,int sloc,int slen){
 
 double snr_peak(double *p,int npts,int nloc,int nlen,int sloc,int slen){
 
-	if (nloc<0 || nloc>npts || nlen<0 || nloc+nlen>npts){
-		printf("In %s: Noise window error ...\n",__func__);
-		return 0.0;
-	}
-	if (sloc<0 || sloc>npts || slen<0 || sloc+slen>npts){
-		printf("In %s: Signal window error ...\n",__func__);
-		return 0.0;
-	}
+    if (nloc<0 || nloc>npts || nlen<0 || nloc+nlen>npts){
+        printf("In %s: Noise window error ...\n",__func__);
+        return 0.0;
+    }
+    if (sloc<0 || sloc>npts || slen<0 || sloc+slen>npts){
+        printf("In %s: Signal window error ...\n",__func__);
+        return 0.0;
+    }
 
     return amplituded(p+sloc,slen)/amplituded(p+nloc,nlen);
 }

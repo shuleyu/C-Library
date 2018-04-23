@@ -7,10 +7,10 @@ int main(){
     double evlo,evla,stlo,stla,dist,plo,pla;
 
     evlo=30;
-	evla=30;
+    evla=30;
 
-	stlo=35;
-	stla=8;
+    stlo=35;
+    stla=8;
 
     dist=5;
 

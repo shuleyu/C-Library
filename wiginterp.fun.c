@@ -47,40 +47,40 @@ void wiginterp_f(float *x, float *y, int npts, double *xx, double *yy, int Newnp
     }
 
     // taken from sac source code wigint.c
-	int j, n1;
-	double a, am, amd, amu, dxd, dxj, dxj1, dxj1s, dxjs, dxu, dy, dyd,
-	 dyu, h, hc, hs, sp, sp1, t1, t2, t3, t4, w, wd, wu;
+    int j, n1;
+    double a, am, amd, amu, dxd, dxj, dxj1, dxj1s, dxjs, dxu, dy, dyd,
+     dyu, h, hc, hs, sp, sp1, t1, t2, t3, t4, w, wd, wu;
 
-	float *const X = &x[0] - 1;
-	float *const Y = &y[0] - 1;
+    float *const X = &x[0] - 1;
+    float *const Y = &y[0] - 1;
     double t;
 
-	/*=====================================================================
-	 * PURPOSE:  Interpolates evenly or unevenly spaced data.
-	 *=====================================================================
-	 * INPUT ARGUMENTS:
-	 *    X:       X array if unevenly spaced, first x if even. [f]
-	 *    Y:       Y array. [fa]
-	 *    NPTS:    Length of (X and) Y arrays. [i]
-	 *    DX:      Set to 0.0 if unevenly spaced, to sampling interval
-	 *             if evenly spaced. [f]
-	 *    EPSI:    water level used in interpolation [f]
-	 *    T:       Time value to interpolate to. [f]
-	 *=====================================================================
-	 * OUTPUT ARGUMENTS:
-	 *    F:       Interpolated y value. [f]
-	 *=====================================================================
-	 * MODULE/LEVEL:  SCM/4
-	 *=====================================================================
-	 * REFERENCE: Wiggins, 1976, BSSA, 66, p.2077.
-	 *=====================================================================
-	 * MODIFICATION HISTORY:
-	 *    100719:  no option on epsi -- just takes input value (jas/vt)
+    /*=====================================================================
+     * PURPOSE:  Interpolates evenly or unevenly spaced data.
+     *=====================================================================
+     * INPUT ARGUMENTS:
+     *    X:       X array if unevenly spaced, first x if even. [f]
+     *    Y:       Y array. [fa]
+     *    NPTS:    Length of (X and) Y arrays. [i]
+     *    DX:      Set to 0.0 if unevenly spaced, to sampling interval
+     *             if evenly spaced. [f]
+     *    EPSI:    water level used in interpolation [f]
+     *    T:       Time value to interpolate to. [f]
+     *=====================================================================
+     * OUTPUT ARGUMENTS:
+     *    F:       Interpolated y value. [f]
+     *=====================================================================
+     * MODULE/LEVEL:  SCM/4
+     *=====================================================================
+     * REFERENCE: Wiggins, 1976, BSSA, 66, p.2077.
+     *=====================================================================
+     * MODIFICATION HISTORY:
+     *    100719:  no option on epsi -- just takes input value (jas/vt)
          *    970202:  Modified order of input arguments.
-	 *    86xxxx:  Original version.
-	 *=====================================================================
-	 * DOCUMENTED/REVIEWED:  870202 (Prolog only.)
-	 *===================================================================== */
+     *    86xxxx:  Original version.
+     *=====================================================================
+     * DOCUMENTED/REVIEWED:  870202 (Prolog only.)
+     *===================================================================== */
     int count;
     double *movex=xx;
     double *movey=yy;
@@ -182,40 +182,40 @@ void wiginterpd(double *x, double *y, int npts, double *xx, double *yy, int Newn
     }
 
     // taken from sac source code wigint.c
-	int j, n1;
-	double a, am, amd, amu, dxd, dxj, dxj1, dxj1s, dxjs, dxu, dy, dyd,
-	 dyu, h, hc, hs, sp, sp1, t1, t2, t3, t4, w, wd, wu;
+    int j, n1;
+    double a, am, amd, amu, dxd, dxj, dxj1, dxj1s, dxjs, dxu, dy, dyd,
+     dyu, h, hc, hs, sp, sp1, t1, t2, t3, t4, w, wd, wu;
 
-	double *const X = &x[0] - 1;
-	double *const Y = &y[0] - 1;
+    double *const X = &x[0] - 1;
+    double *const Y = &y[0] - 1;
     double t;
 
-	/*=====================================================================
-	 * PURPOSE:  Interpolates evenly or unevenly spaced data.
-	 *=====================================================================
-	 * INPUT ARGUMENTS:
-	 *    X:       X array if unevenly spaced, first x if even. [f]
-	 *    Y:       Y array. [fa]
-	 *    NPTS:    Length of (X and) Y arrays. [i]
-	 *    DX:      Set to 0.0 if unevenly spaced, to sampling interval
-	 *             if evenly spaced. [f]
-	 *    EPSI:    water level used in interpolation [f]
-	 *    T:       Time value to interpolate to. [f]
-	 *=====================================================================
-	 * OUTPUT ARGUMENTS:
-	 *    F:       Interpolated y value. [f]
-	 *=====================================================================
-	 * MODULE/LEVEL:  SCM/4
-	 *=====================================================================
-	 * REFERENCE: Wiggins, 1976, BSSA, 66, p.2077.
-	 *=====================================================================
-	 * MODIFICATION HISTORY:
-	 *    100719:  no option on epsi -- just takes input value (jas/vt)
+    /*=====================================================================
+     * PURPOSE:  Interpolates evenly or unevenly spaced data.
+     *=====================================================================
+     * INPUT ARGUMENTS:
+     *    X:       X array if unevenly spaced, first x if even. [f]
+     *    Y:       Y array. [fa]
+     *    NPTS:    Length of (X and) Y arrays. [i]
+     *    DX:      Set to 0.0 if unevenly spaced, to sampling interval
+     *             if evenly spaced. [f]
+     *    EPSI:    water level used in interpolation [f]
+     *    T:       Time value to interpolate to. [f]
+     *=====================================================================
+     * OUTPUT ARGUMENTS:
+     *    F:       Interpolated y value. [f]
+     *=====================================================================
+     * MODULE/LEVEL:  SCM/4
+     *=====================================================================
+     * REFERENCE: Wiggins, 1976, BSSA, 66, p.2077.
+     *=====================================================================
+     * MODIFICATION HISTORY:
+     *    100719:  no option on epsi -- just takes input value (jas/vt)
          *    970202:  Modified order of input arguments.
-	 *    86xxxx:  Original version.
-	 *=====================================================================
-	 * DOCUMENTED/REVIEWED:  870202 (Prolog only.)
-	 *===================================================================== */
+     *    86xxxx:  Original version.
+     *=====================================================================
+     * DOCUMENTED/REVIEWED:  870202 (Prolog only.)
+     *===================================================================== */
     int count;
     double *movex=xx;
     double *movey=yy;

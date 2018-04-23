@@ -128,7 +128,7 @@ void waypoint(double EVLO,double EVLA,double stlo, double stla,double dist,doubl
 
     // Step 8. Adjust longitude to -180 < plo <= 180.
 
-	(*plo)=lon2180(*plo);
+    (*plo)=lon2180(*plo);
 
     return;
 }
@@ -179,7 +179,7 @@ void waypoint_az(double EVLO,double EVLA,double az,double dist,double *plo,doubl
 
     // Step 8. Adjust longitude to -180 < plo <= 180.
 
-	(*plo)=lon2180(*plo);
+    (*plo)=lon2180(*plo);
 
     return;
 }
@@ -260,17 +260,17 @@ int waypoint_sectionpath(char *P,double EVLO,double EVLA,double EVDP,double stlo
     FILE   *fp;
     double RE,dtheta,theta[2000],radius[2000],*new_theta,*new_radius,gcarc;
 
-	gcarc=gcpdistance(EVLO,EVLA,stlo,stla);
+    gcarc=gcpdistance(EVLO,EVLA,stlo,stla);
     new_npts=(int)ceil(gcarc/0.01)+1;
 
-	if (new_npts>npts_in){
+    if (new_npts>npts_in){
         printf("In %s: Malloced memory too small ...\n",__func__);
-		return -2;
-	}
+        return -2;
+    }
 
     RE=6371.0;
 
-	// TauP
+    // TauP
     fp=fopen(".taup","w");
     fprintf(fp,"taup.distance.precision=3\ntaup.depth.precision=2");
     fclose(fp);
@@ -292,12 +292,12 @@ int waypoint_sectionpath(char *P,double EVLO,double EVLA,double EVDP,double stlo
     npts=count;
     pclose(fp);
 
-	// No penertration.
+    // No penertration.
     if (min_vald(radius,npts,&count)>RE-depth){
         return -1;
     }
 
-	// With penertration.
+    // With penertration.
     dtheta=theta[npts-1]/(new_npts-1);
 
     new_theta=(double *)malloc(new_npts*sizeof(double));
@@ -309,28 +309,28 @@ int waypoint_sectionpath(char *P,double EVLO,double EVLA,double EVDP,double stlo
 
     wiginterpd(theta,radius,npts,new_theta,new_radius,new_npts,1);
 
-	// Find the lon/lat/depth on the path beneath depth.
+    // Find the lon/lat/depth on the path beneath depth.
     StartPoint=0;
     EndPoint=new_npts;
 
     for (count=0;count<new_npts;count++){
         if (new_radius[count]<RE-depth){
-			StartPoint=count;
+            StartPoint=count;
             break;
         }
     }
 
     for (count=new_npts-1;count>=0;count--){
         if (new_radius[count]<RE-depth){
-			EndPoint=count;
+            EndPoint=count;
             break;
         }
     }
 
-	for (count=StartPoint;count<=EndPoint;count++){
-		waypoint(EVLO,EVLA,stlo,stla,new_theta[count],&ans[count-StartPoint][0],&ans[count-StartPoint][1]);
-		ans[count-StartPoint][2]=RE-new_radius[count];
-	}
+    for (count=StartPoint;count<=EndPoint;count++){
+        waypoint(EVLO,EVLA,stlo,stla,new_theta[count],&ans[count-StartPoint][0],&ans[count-StartPoint][1]);
+        ans[count-StartPoint][2]=RE-new_radius[count];
+    }
 
     free(new_theta);
     free(new_radius);

@@ -23,39 +23,39 @@
 
 void redirect_i(int *p, int nx, int ny, int *pp){
 
-	int Cnt,Cnt2,Cnt3=0;
-	for (Cnt=0;Cnt<ny;Cnt++){
-		for (Cnt2=0;Cnt2<nx;Cnt2++){
-			pp[Cnt3]=p[Cnt+Cnt2*ny];
-			Cnt3++;
-		}
-	}
+    int Cnt,Cnt2,Cnt3=0;
+    for (Cnt=0;Cnt<ny;Cnt++){
+        for (Cnt2=0;Cnt2<nx;Cnt2++){
+            pp[Cnt3]=p[Cnt+Cnt2*ny];
+            Cnt3++;
+        }
+    }
 
-	return;
+    return;
 }
 
 void redirect_f(float *p, int nx, int ny, float *pp){
 
-	int Cnt,Cnt2,Cnt3=0;
-	for (Cnt=0;Cnt<ny;Cnt++){
-		for (Cnt2=0;Cnt2<nx;Cnt2++){
-			pp[Cnt3]=p[Cnt+Cnt2*ny];
-			Cnt3++;
-		}
-	}
+    int Cnt,Cnt2,Cnt3=0;
+    for (Cnt=0;Cnt<ny;Cnt++){
+        for (Cnt2=0;Cnt2<nx;Cnt2++){
+            pp[Cnt3]=p[Cnt+Cnt2*ny];
+            Cnt3++;
+        }
+    }
 
-	return;
+    return;
 }
 
 void redirect_d(double *p, int nx, int ny, double *pp){
 
-	int Cnt,Cnt2,Cnt3=0;
-	for (Cnt=0;Cnt<ny;Cnt++){
-		for (Cnt2=0;Cnt2<nx;Cnt2++){
-			pp[Cnt3]=p[Cnt+Cnt2*ny];
-			Cnt3++;
-		}
-	}
+    int Cnt,Cnt2,Cnt3=0;
+    for (Cnt=0;Cnt<ny;Cnt++){
+        for (Cnt2=0;Cnt2<nx;Cnt2++){
+            pp[Cnt3]=p[Cnt+Cnt2*ny];
+            Cnt3++;
+        }
+    }
 
-	return;
+    return;
 }

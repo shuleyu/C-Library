@@ -104,22 +104,22 @@ void tk_decon(double **x,int xnptsx,int xnptsy,double *y,int ynpts, int P1, int 
     // Fill with water.
     for (count=0;count<NPTS_FFT;count++){
 
-		if (out[count][0]==0 && out[count][1]==0){
-			flag[count]=0;
-		}
-		else{
-			complex_divide(esf_unfilled_amp[count]+lambda,0.0,out[count][0],-out[count][1],&out[count][0],&out[count][1]);
-			flag[count]=1;
-		}
+        if (out[count][0]==0 && out[count][1]==0){
+            flag[count]=0;
+        }
+        else{
+            complex_divide(esf_unfilled_amp[count]+lambda,0.0,out[count][0],-out[count][1],&out[count][0],&out[count][1]);
+            flag[count]=1;
+        }
 
-		// If use ESW phase information:
+        // If use ESW phase information:
         esf_filled_real[count]=out[count][0];
         esf_filled_imag[count]=out[count][1];
     }
 
 
     if (verbose==1){
-		// Return Time domain water-filled source.
+        // Return Time domain water-filled source.
         for (count=0;count<NPTS_FFT;count++){
             filled_amp[count]=sqrt(pow(out[count][0],2)+pow(out[count][1],2));
             filled_phase[count]=atan2(out[count][1],out[count][0]);
@@ -156,13 +156,13 @@ void tk_decon(double **x,int xnptsx,int xnptsy,double *y,int ynpts, int P1, int 
 
         // Division.
         for (count2=0;count2<NPTS_FFT;count2++){
-			if (flag[count2]==1){
-				complex_divide(out[count2][0],out[count2][1],esf_filled_real[count2],esf_filled_imag[count2],&out[count2][0],&out[count2][1]);
-			}
-			else{
-				out[count2][0]=0.0;
-				out[count2][1]=0.0;
-			}
+            if (flag[count2]==1){
+                complex_divide(out[count2][0],out[count2][1],esf_filled_real[count2],esf_filled_imag[count2],&out[count2][0],&out[count2][1]);
+            }
+            else{
+                out[count2][0]=0.0;
+                out[count2][1]=0.0;
+            }
         }
 
 

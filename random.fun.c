@@ -70,20 +70,20 @@ void random_num(double *p,int npts){
 
 void random_int(int min, int max,int *p,int npts) {
 
-	if (min>max){
-		printf("In %s: Range error ...\n",__func__);
-		return;
-	}
+    if (min>max){
+        printf("In %s: Range error ...\n",__func__);
+        return;
+    }
 
-	int count;
+    int count;
 
-	if (min==max){
-		for (count=0;count<npts;count++){
-			p[count]=min;
-		}
-		sleep(1);
-		return;
-	}
+    if (min==max){
+        for (count=0;count<npts;count++){
+            p[count]=min;
+        }
+        sleep(1);
+        return;
+    }
 
     max-=1;
     srand(time(NULL));
@@ -101,7 +101,7 @@ void random_int(int min, int max,int *p,int npts) {
         p[count]=1+(int)x/bin_size;
     }
 
-	sleep(1);
+    sleep(1);
     return;
 }
 

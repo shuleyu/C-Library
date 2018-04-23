@@ -45,25 +45,25 @@ int main(){
 
 
     // Make source, use gaussian with sigma.
-	gaussianfun(source,NPTS_source,delta,sigma);
-// 	trifun(source,NPTS_source,10.0/(NPTS_source*delta));
+    gaussianfun(source,NPTS_source,delta,sigma);
+//     trifun(source,NPTS_source,10.0/(NPTS_source*delta));
 
     for (count=0;count<NPTS_source-(int)(secondarrival/delta);count++){
         source[count]+=secondamp*source[count+(int)(secondarrival/delta)];
     }
     reverse_array(source,NPTS_source);
     normalized(source,NPTS_source);
-	max_vald(source,NPTS_source,&P1);
+    max_vald(source,NPTS_source,&P1);
 
 
     // Make signal.
     convolve(structure,source,NPTS_struct,NPTS_source,signal);
     normalized(signal,NPTS_signal);
     taperd(signal,NPTS_signal,taperwidth);
-	max_vald(signal,NPTS_signal,&P2);
+    max_vald(signal,NPTS_signal,&P2);
 
     // Decon.
-// 	butterworth_lp(&signal,1,NPTS_signal,delta,2,2,5,&signal);
+//     butterworth_lp(&signal,1,NPTS_signal,delta,2,2,5,&signal);
 
     tk_decon(&signal,1,NPTS_signal,source,NPTS_source,P1,&P2,decon,lambda,delta,0,NULL,NULL,NULL,NULL,NULL,NULL);
 

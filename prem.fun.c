@@ -294,41 +294,41 @@ void prem_smoothed(double Depth,double *rho,double *vpv,double *vph,double *vsv,
 
     double r;
 
-	r=6371.0-Depth;
+    r=6371.0-Depth;
     prem(Depth,1,0,rho,vpv,vph,vsv,vsh,qu,qk,yita);
 
-	// Remove Crust.
+    // Remove Crust.
     if ( RemoveCrust==1 && 6346.6<=r ) {
-		(*vsv)=4.49100712;
-		(*vpv)=8.11061727;
-		(*rho)=3.38074821;
-	}
+        (*vsv)=4.49100712;
+        (*vpv)=8.11061727;
+        (*rho)=3.38074821;
+    }
 
-	// Remove 220km.
-	if ( Remove220==1 && 6121.0<=r && r<6181.0 ){
-		(*vsv)=r_vs(6181.0)+(r_vs(6121.0)-r_vs(6181.0))/(6121.0-6181.0)*(r-6181.0);
-		(*vpv)=r_vp(6181.0)+(r_vp(6121.0)-r_vp(6181.0))/(6121.0-6181.0)*(r-6181.0);
-		(*rho)=r_rho(6181.0)+(r_rho(6121.0)-r_rho(6181.0))/(6121.0-6181.0)*(r-6181.0);
-	}
+    // Remove 220km.
+    if ( Remove220==1 && 6121.0<=r && r<6181.0 ){
+        (*vsv)=r_vs(6181.0)+(r_vs(6121.0)-r_vs(6181.0))/(6121.0-6181.0)*(r-6181.0);
+        (*vpv)=r_vp(6181.0)+(r_vp(6121.0)-r_vp(6181.0))/(6121.0-6181.0)*(r-6181.0);
+        (*rho)=r_rho(6181.0)+(r_rho(6121.0)-r_rho(6181.0))/(6121.0-6181.0)*(r-6181.0);
+    }
 
-	// Remove 400km.
-	if ( Remove400==1 && 5941.0<=r && r<6001.0 ){
-		(*vsv)=r_vs(6001.0)+(r_vs(5941.0)-r_vs(6001.0))/(5941.0-6001.0)*(r-6001.0);
-		(*vpv)=r_vp(6001.0)+(r_vp(5941.0)-r_vp(6001.0))/(5941.0-6001.0)*(r-6001.0);
-		(*rho)=r_rho(6001.0)+(r_rho(5941.0)-r_rho(6001.0))/(5941.0-6001.0)*(r-6001.0);
-	}
+    // Remove 400km.
+    if ( Remove400==1 && 5941.0<=r && r<6001.0 ){
+        (*vsv)=r_vs(6001.0)+(r_vs(5941.0)-r_vs(6001.0))/(5941.0-6001.0)*(r-6001.0);
+        (*vpv)=r_vp(6001.0)+(r_vp(5941.0)-r_vp(6001.0))/(5941.0-6001.0)*(r-6001.0);
+        (*rho)=r_rho(6001.0)+(r_rho(5941.0)-r_rho(6001.0))/(5941.0-6001.0)*(r-6001.0);
+    }
 
-	// Remove 670km.
-	if ( Remove670==1 && 5671.0<=r && r<5731.0 ){
-		(*vsv)=r_vs(5731.0)+(r_vs(5671.0)-r_vs(5731.0))/(5671.0-5731.0)*(r-5731.0);
-		(*vpv)=r_vp(5731.0)+(r_vp(5671.0)-r_vp(5731.0))/(5671.0-5731.0)*(r-5731.0);
-		(*rho)=r_rho(5731.0)+(r_rho(5671.0)-r_rho(5731.0))/(5671.0-5731.0)*(r-5731.0);
-	}
+    // Remove 670km.
+    if ( Remove670==1 && 5671.0<=r && r<5731.0 ){
+        (*vsv)=r_vs(5731.0)+(r_vs(5671.0)-r_vs(5731.0))/(5671.0-5731.0)*(r-5731.0);
+        (*vpv)=r_vp(5731.0)+(r_vp(5671.0)-r_vp(5731.0))/(5671.0-5731.0)*(r-5731.0);
+        (*rho)=r_rho(5731.0)+(r_rho(5671.0)-r_rho(5731.0))/(5671.0-5731.0)*(r-5731.0);
+    }
 
-	(*vsh)=(*vsv);
-	(*vph)=(*vpv);
+    (*vsh)=(*vsv);
+    (*vph)=(*vpv);
 
-	return;
+    return;
 }
 
 double d_vs_smoothed(double Depth,int RemoveCrust, int Remove220, int Remove400, int Remove670){
@@ -369,28 +369,28 @@ double r_rho_smoothed(double Radius,int RemoveCrust, int Remove220, int Remove40
 
 void prem_x(double Depth,double *rho,double *vpv,double *vph,double *vsv,double *vsh,double *qu,double *qk,double *yita){
     prem(Depth,1,0,rho,vpv,vph,vsv,vsh,qu,qk,yita);
-	double x=1-Depth/6371.0;
-	if (Depth<=400) {
-		*vsh=-1147.226569441673*pow(x,3)+3481.648723871561*pow(x,2)-3521.617739418105*x+1191.686592108216;
-		*vsv=*vsh;
-		*rho=734.780041069559*pow(x,3)-2071.193615789281*pow(x,2)+1938.047108369886*x-598.252785440164;
-		*vph=-4.9208884249226*pow(x,3)+274.0496803031463*pow(x,2)-533.3366953315248*x+272.3185207233010;
-		*vpv=*vph;
-	}
+    double x=1-Depth/6371.0;
+    if (Depth<=400) {
+        *vsh=-1147.226569441673*pow(x,3)+3481.648723871561*pow(x,2)-3521.617739418105*x+1191.686592108216;
+        *vsv=*vsh;
+        *rho=734.780041069559*pow(x,3)-2071.193615789281*pow(x,2)+1938.047108369886*x-598.252785440164;
+        *vph=-4.9208884249226*pow(x,3)+274.0496803031463*pow(x,2)-533.3366953315248*x+272.3185207233010;
+        *vpv=*vph;
+    }
 
-	if (600<=Depth && Depth<=1155.674) {
-		*vsh=-84.46554942*x*x+134.4361189*x-46.95411628;
-		*vsv=*vsh;
-	}
-	if (600<=Depth && Depth<=1726.323) {
-		*rho=-13.29902926*x*x+16.06334012*x+0.3373366175;
-	}
-	if (600<=Depth && Depth<=970.426) {
-		*vph=-189.1928756*x*x+310.1340153*x-115.5330402;
-		*vpv=*vph;
-	}
+    if (600<=Depth && Depth<=1155.674) {
+        *vsh=-84.46554942*x*x+134.4361189*x-46.95411628;
+        *vsv=*vsh;
+    }
+    if (600<=Depth && Depth<=1726.323) {
+        *rho=-13.29902926*x*x+16.06334012*x+0.3373366175;
+    }
+    if (600<=Depth && Depth<=970.426) {
+        *vph=-189.1928756*x*x+310.1340153*x-115.5330402;
+        *vpv=*vph;
+    }
 
-	return;
+    return;
 }
 double d_vs_x(double Depth){
     double rho,vpv,vph,vsv,vsh,qu,qk,yita;
@@ -411,13 +411,13 @@ double d_rho_x(double Depth){
 }
 
 double r_vs_x(double Radius){
-	return d_vs_x(6371.0-Radius);
+    return d_vs_x(6371.0-Radius);
 }
 
 double r_vp_x(double Radius){
-	return d_vp_x(6371.0-Radius);
+    return d_vp_x(6371.0-Radius);
 }
 
 double r_rho_x(double Radius){
-	return d_rho_x(6371.0-Radius);
+    return d_rho_x(6371.0-Radius);
 }

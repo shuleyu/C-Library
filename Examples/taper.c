@@ -13,7 +13,7 @@ int main(){
 
     fp=fopen("data/taper_infile","r");
     for (count=0;count<npts;count++){
-		fscanf(fp,"%f",&p[count]);
+        fscanf(fp,"%f",&p[count]);
     }
     fclose(fp);
 

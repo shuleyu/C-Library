@@ -39,9 +39,9 @@ int main(int argc, char **argv){
         printf("Ray turns !\n");
     }
 
-	printf("Rayp      : %.3lf\n",rayp/180*M_PI);
-	printf("TravelTime: %.3lf\n",traveltime);
-	printf("Pursuit   : %.3lf\n",traveldistance);
+    printf("Rayp      : %.3lf\n",rayp/180*M_PI);
+    printf("TravelTime: %.3lf\n",traveltime);
+    printf("Pursuit   : %.3lf\n",traveldistance);
 
     free(Radius);
     free(Velocity);

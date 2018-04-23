@@ -35,27 +35,27 @@ void sort_quick(float *p, int npts){
     j=npts-1;
     while ( i!=j ){
 
-		while ( j>i && p[j]>key ){
+        while ( j>i && p[j]>key ){
             j--;
         }
 
-		if ( j>i ){
-			p[i]=p[j];
-			i++;
-		}
-
-		while ( j>i && p[i]<key ){
+        if ( j>i ){
+            p[i]=p[j];
             i++;
         }
-		if ( j>i ){
-			p[j]=p[i];
-			j--;
-		}
+
+        while ( j>i && p[i]<key ){
+            i++;
+        }
+        if ( j>i ){
+            p[j]=p[i];
+            j--;
+        }
     }
 
     p[i]=key;
-	sort_quick(p,i);
-	sort_quick(p+i+1,npts-1-i);
+    sort_quick(p,i);
+    sort_quick(p+i+1,npts-1-i);
 }
 
 void sort_quickd(double *p, int npts){
@@ -71,27 +71,27 @@ void sort_quickd(double *p, int npts){
     j=npts-1;
     while ( i!=j ){
 
-		while ( j>i && p[j]>key ){
+        while ( j>i && p[j]>key ){
             j--;
         }
 
-		if ( j>i ){
-			p[i]=p[j];
-			i++;
-		}
-
-		while ( j>i && p[i]<key ){
+        if ( j>i ){
+            p[i]=p[j];
             i++;
         }
-		if ( j>i ){
-			p[j]=p[i];
-			j--;
-		}
+
+        while ( j>i && p[i]<key ){
+            i++;
+        }
+        if ( j>i ){
+            p[j]=p[i];
+            j--;
+        }
     }
 
     p[i]=key;
-	sort_quickd(p,i);
-	sort_quickd(p+i+1,npts-1-i);
+    sort_quickd(p,i);
+    sort_quickd(p+i+1,npts-1-i);
 }
 
 void sort_quick_i(int *p, int npts){
@@ -106,25 +106,25 @@ void sort_quick_i(int *p, int npts){
     j=npts-1;
     while ( i!=j ){
 
-		while ( j>i && p[j]>key ){
+        while ( j>i && p[j]>key ){
             j--;
         }
 
-		if ( j>i ){
-			p[i]=p[j];
-			i++;
-		}
-
-		while ( j>i && p[i]<key ){
+        if ( j>i ){
+            p[i]=p[j];
             i++;
         }
-		if ( j>i ){
-			p[j]=p[i];
-			j--;
-		}
+
+        while ( j>i && p[i]<key ){
+            i++;
+        }
+        if ( j>i ){
+            p[j]=p[i];
+            j--;
+        }
     }
 
     p[i]=key;
-	sort_quick_i(p,i);
-	sort_quick_i(p+i+1,npts-1-i);
+    sort_quick_i(p,i);
+    sort_quick_i(p+i+1,npts-1-i);
 }

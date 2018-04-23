@@ -26,17 +26,17 @@ void findpeak(double *p, int npts, int *Peak, int WB, int WL){
         return;
     }
 
-	int End=*Peak+WB+WL-1;
-	if ( End>npts-1 ){
-		End=npts-1;
-	}
+    int End=*Peak+WB+WL-1;
+    if ( End>npts-1 ){
+        End=npts-1;
+    }
 
     int count;
-	double AMP=fabs(p[*Peak]);
+    double AMP=fabs(p[*Peak]);
     for (count=*Peak+WB;count<=End;count++){
         if (AMP<fabs(p[count])){
             AMP=fabs(p[count]);
-			*Peak=count;
+            *Peak=count;
         }
     }
 

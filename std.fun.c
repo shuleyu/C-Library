@@ -105,7 +105,7 @@ double std_err(float *p, int npts){
         return 0;
     }
 
-	return std_f(p,npts)/sqrt(npts);
+    return std_f(p,npts)/sqrt(npts);
 }
 
 double std_errd(double *p, int npts){
@@ -114,5 +114,5 @@ double std_errd(double *p, int npts){
         return 0;
     }
 
-	return std_d(p,npts)/sqrt(npts);
+    return std_d(p,npts)/sqrt(npts);
 }

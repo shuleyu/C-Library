@@ -122,11 +122,11 @@ double rad_pat_loc(double strike,double dip,double rake,double evlo,double evla,
     a=atan2(y,x);
 
     // Calculate take_off angle (in rad).
-	t=rayp2takeoff(rayp,evdp,P+1);
+    t=rayp2takeoff(rayp,evdp,P+1);
 
     // Calculate radiation pattern.
-	AMP=rad_pat(strike,dip,rake,a*180/M_PI,t*180/M_PI,P);
-	return AMP;
+    AMP=rad_pat(strike,dip,rake,a*180/M_PI,t*180/M_PI,P);
+    return AMP;
 }
 
 double rad_pat_rayp(double strike,double dip,double rake,double az,double evdp,double rayp,int P){
@@ -140,10 +140,10 @@ double rad_pat_rayp(double strike,double dip,double rake,double az,double evdp,d
     double AMP,t;
 
     // Calculate take_off angle (in rad).
-	t=rayp2takeoff(rayp,evdp,P+1);
+    t=rayp2takeoff(rayp,evdp,P+1);
 
     // Calculate radiation pattern.
-	AMP=rad_pat(strike,dip,rake,az,t*180/M_PI,P);
+    AMP=rad_pat(strike,dip,rake,az,t*180/M_PI,P);
 
-	return AMP;
+    return AMP;
 }

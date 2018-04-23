@@ -86,14 +86,14 @@ void taperd(double *p, int npts, double width){
 }
 
 void taperd_section(double *p, int npts, double zerowidth, double width){
-	
-	int count,N=(int)ceil(npts*zerowidth);
-	
-	for (count=0;count<N;count++){
-		p[count]=0;
-		p[npts-count-1]=0;
-	}
-	taperd(p+N,npts-2*N,width);
+    
+    int count,N=(int)ceil(npts*zerowidth);
+    
+    for (count=0;count<N;count++){
+        p[count]=0;
+        p[npts-count-1]=0;
+    }
+    taperd(p+N,npts-2*N,width);
 
-	return;
+    return;
 }

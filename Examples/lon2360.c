@@ -8,7 +8,7 @@ int main(){
     // Use function.
     while (Lon<361.2){
         printf("%.16lf\t%.16lf\n",Lon,lon2360(Lon));
-		Lon+=dl;
+        Lon+=dl;
     }
 
     return 0;    

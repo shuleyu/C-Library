@@ -47,8 +47,8 @@
  *    CCC = ---------------------------------------------------------------
  *            sqrt( (sum of x^2)*(sum of y^2) ) * sqrt ( max (xx, yy ) )
  *
- * 		xx = sum of x^2
- * 		yy = sum of y^2
+ *         xx = sum of x^2
+ *         yy = sum of y^2
  *
  * This design is for comparisons which need to take absolute
  * amplitude of the two trace into account.
@@ -106,16 +106,16 @@ int CC(double *x, int xlen, double *y, int ylen, int *shift, double *CCC){
         return 1;
     }
 
-	// Calculate x average and y average.
-	double avrx=0,avry=0;
+    // Calculate x average and y average.
+    double avrx=0,avry=0;
     for (count=0;count<xlen;count++){
-		avrx+=x[count];
-	}
-	avrx/=xlen;
+        avrx+=x[count];
+    }
+    avrx/=xlen;
     for (count=0;count<ylen;count++){
-		avry+=y[count];
-	}
-	avry/=ylen;
+        avry+=y[count];
+    }
+    avry/=ylen;
 
     // Denominator.
     xx=0;
@@ -168,16 +168,16 @@ int CC_positive(double *x, int xlen, double *y, int ylen, int *shift, double *CC
         return 1;
     }
 
-	// Calculate x average and y average.
-	double avrx=0,avry=0;
+    // Calculate x average and y average.
+    double avrx=0,avry=0;
     for (count=0;count<xlen;count++){
-		avrx+=x[count];
-	}
-	avrx/=xlen;
+        avrx+=x[count];
+    }
+    avrx/=xlen;
     for (count=0;count<ylen;count++){
-		avry+=y[count];
-	}
-	avry/=ylen;
+        avry+=y[count];
+    }
+    avry/=ylen;
 
     // Denominator.
     xx=0;
@@ -230,16 +230,16 @@ int CC_trace(double *x, int xlen, double *y, int ylen, int *shift, double *CCC, 
         return 1;
     }
 
-	// Calculate x average and y average.
-	double avrx=0,avry=0;
+    // Calculate x average and y average.
+    double avrx=0,avry=0;
     for (count=0;count<xlen;count++){
-		avrx+=x[count];
-	}
-	avrx/=xlen;
+        avrx+=x[count];
+    }
+    avrx/=xlen;
     for (count=0;count<ylen;count++){
-		avry+=y[count];
-	}
-	avry/=ylen;
+        avry+=y[count];
+    }
+    avry/=ylen;
 
     // Denominator.
     xx=0;
@@ -291,16 +291,16 @@ int CC_static(double *x, int xlen, double *y, int ylen, double *CCC){
         return 1;
     }
 
-	// Calculate x average and y average.
-	double avrx=0,avry=0;
+    // Calculate x average and y average.
+    double avrx=0,avry=0;
     for (count=0;count<xlen;count++){
-		avrx+=x[count];
-	}
-	avrx/=xlen;
+        avrx+=x[count];
+    }
+    avrx/=xlen;
     for (count=0;count<ylen;count++){
-		avry+=y[count];
-	}
-	avry/=ylen;
+        avry+=y[count];
+    }
+    avry/=ylen;
 
     // Denominator.
     xx=0;
@@ -344,16 +344,16 @@ int CC_static_energy(double *x, int xlen, double *y, int ylen, double *CCC){
         return 1;
     }
 
-	// Calculate x average and y average.
-	double avrx=0,avry=0;
+    // Calculate x average and y average.
+    double avrx=0,avry=0;
     for (count=0;count<xlen;count++){
-		avrx+=x[count];
-	}
-	avrx/=xlen;
+        avrx+=x[count];
+    }
+    avrx/=xlen;
     for (count=0;count<ylen;count++){
-		avry+=y[count];
-	}
-	avry/=ylen;
+        avry+=y[count];
+    }
+    avry/=ylen;
 
     // Denominator.
     xx=0;
@@ -398,16 +398,16 @@ int CC_limitshift(double *x, int xlen, double *y, int ylen, int *shift, double *
         return 1;
     }
 
-	// Calculate x average and y average.
-	double avrx=0,avry=0;
+    // Calculate x average and y average.
+    double avrx=0,avry=0;
     for (count=0;count<xlen;count++){
-		avrx+=x[count];
-	}
-	avrx/=xlen;
+        avrx+=x[count];
+    }
+    avrx/=xlen;
     for (count=0;count<ylen;count++){
-		avry+=y[count];
-	}
-	avry/=ylen;
+        avry+=y[count];
+    }
+    avry/=ylen;
 
     // Denominator.
     xx=0;

@@ -37,10 +37,10 @@ int main(){
         printf("%.8lf\t%.8lf\n",x,y);
     }
 
-	free(x1);
-	free(y1);
-	free(x2);
-	free(y2);
+    free(x1);
+    free(y1);
+    free(x2);
+    free(y2);
 
     return 0;
 }

@@ -104,12 +104,12 @@ void shift_stack(double **p, int nptsx, int nptsy, int flag_shift, int *shift, i
             }
         }
 
-		if (flag_weight==1){
-			std[count]=std_weight(tmparray,Weight,nptsx);
-		}
-		else{
-			std[count]=std_d(tmparray,nptsx);
-		}
+        if (flag_weight==1){
+            std[count]=std_weight(tmparray,Weight,nptsx);
+        }
+        else{
+            std[count]=std_d(tmparray,nptsx);
+        }
     }
 
     if (flag_shift!=1){

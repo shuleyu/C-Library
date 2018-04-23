@@ -13,16 +13,16 @@ int main(){
     y=(double *)malloc(npts*sizeof(double));
 
     fp=fopen("data/retrend_infile","r");
-	for (count=0;count<npts;count++){
-		fscanf(fp,"%lf",&y[count]);
-		x[count]=count*0.01;
+    for (count=0;count<npts;count++){
+        fscanf(fp,"%lf",&y[count]);
+        x[count]=count*0.01;
     }
     fclose(fp);
 
     // Use function.
     linear_fitting(x,y,npts,&slope,&intercept);
 
-	printf("%.10lf\t%.10lf\n",slope,intercept);
+    printf("%.10lf\t%.10lf\n",slope,intercept);
 
     return 0;
 }

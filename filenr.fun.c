@@ -39,7 +39,7 @@ int filenr(const char *filename){
         fgets(tmpstr,10000,fp);
     }
 
-	free(tmpstr);
+    free(tmpstr);
     fclose(fp);
 
     return count;

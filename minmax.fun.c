@@ -111,7 +111,7 @@ float minval_f(float *p, int npts, int *pp){
     }
 
     int    count;
-	float  val=p[0];
+    float  val=p[0];
 
     for (count=0;count<npts;count++){
         if (val>p[count]){

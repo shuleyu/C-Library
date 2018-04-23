@@ -13,7 +13,7 @@ int main(){
 
     fp=fopen("data/taper_infile","r");
     for (count=0;count<npts;count++){
-		fscanf(fp,"%lf",&p[count]);
+        fscanf(fp,"%lf",&p[count]);
     }
     fclose(fp);
 
@@ -24,7 +24,7 @@ int main(){
     for (count=0;count<npts;count++){
         fprintf(fp,"%.10lf\n",p[count]);
     }
-	fclose(fp);
+    fclose(fp);
 
     return 0;
 }

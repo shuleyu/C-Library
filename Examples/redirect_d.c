@@ -9,20 +9,20 @@ int main(){
     double pp[10];
 
 
-	printf("Original Ordering: ");
-	for (Cnt=0;Cnt<nx*ny;Cnt++){
-		printf("%.2lf\t",p[Cnt]);
-	}
-	printf("\n");
+    printf("Original Ordering: ");
+    for (Cnt=0;Cnt<nx*ny;Cnt++){
+        printf("%.2lf\t",p[Cnt]);
+    }
+    printf("\n");
 
     // Use function.
-	redirect_d(p,2,5,pp);
+    redirect_d(p,2,5,pp);
 
-	printf("Re-directed Ordering: ");
-	for (Cnt=0;Cnt<nx*ny;Cnt++){
-		printf("%.2lf\t",pp[Cnt]);
-	}
-	printf("\n");
+    printf("Re-directed Ordering: ");
+    for (Cnt=0;Cnt<nx*ny;Cnt++){
+        printf("%.2lf\t",pp[Cnt]);
+    }
+    printf("\n");
 
     return 0;
 }

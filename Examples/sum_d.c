@@ -10,7 +10,7 @@ int main(){
 
     // Read data.
 
-	npts=filenr("data/normalize_infile");
+    npts=filenr("data/normalize_infile");
     p=(double *)malloc(npts*sizeof(double));
 
     fp=fopen("data/normalize_infile","r");
@@ -22,7 +22,7 @@ int main(){
     // Use function.
     printf("%lf\n",sum_d(p,npts));
 
-	free(p);
+    free(p);
     
     return 0;    
 }

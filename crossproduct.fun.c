@@ -37,12 +37,12 @@
 ****************************************************************/
 
 inline void crossproduct(double x1, double y1, double z1, double x2, double y2, double z2, double *x3, double *y3, double *z3){
-	(*x3)=(y1*z2-y2*z1);
-	(*y3)=(z1*x2-z2*x1);
-	(*z3)=(x1*y2-x2*y1);
-	return;
+    (*x3)=(y1*z2-y2*z1);
+    (*y3)=(z1*x2-z2*x1);
+    (*z3)=(x1*y2-x2*y1);
+    return;
 }
 
 inline double crossproduct_2d(double x1, double y1, double x2, double y2){
-	return (x1*y2-x2*y1);
+    return (x1*y2-x2*y1);
 }

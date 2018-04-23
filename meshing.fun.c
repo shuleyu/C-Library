@@ -14,11 +14,11 @@
  * double higherbound  ----  Grid higher bound.
  * double delta        ----  Grid interval.
  * int    flag         ----  mode.
- * 							   =0: fix delta; last grid value
- * 							       is less equal to higherbound.
- * 							   =1: decrease delta a little bit
- * 							       such that the last grid value
- * 							       equals to higherbound.
+ *                                =0: fix delta; last grid value
+ *                                    is less equal to higherbound.
+ *                                =1: decrease delta a little bit
+ *                                    such that the last grid value
+ *                                    equals to higherbound.
  *
  * Return value: The array size needed for the mesh.
  *
@@ -30,16 +30,16 @@
 
 int meshsize(double lowerbound, double higherbound, double delta, int flag){
 
-	if (flag==0){
-		return 1+(int)floor((higherbound-lowerbound)/delta);
-	}
-	else if (flag==1){
-		return 1+(int)ceil((higherbound-lowerbound)/delta);
-	}
-	else{
-		printf("In %s: Flag error ...\n",__func__);
-		return -1;
-	}
+    if (flag==0){
+        return 1+(int)floor((higherbound-lowerbound)/delta);
+    }
+    else if (flag==1){
+        return 1+(int)ceil((higherbound-lowerbound)/delta);
+    }
+    else{
+        printf("In %s: Flag error ...\n",__func__);
+        return -1;
+    }
 }
 
 /************************************************************
@@ -51,14 +51,14 @@ int meshsize(double lowerbound, double higherbound, double delta, int flag){
  * double higherbound  ----  Grid higher bound.
  * double delta        ----  Grid interval.
  * int    flag         ----  mode.
- * 							   =0: fix delta; last grid value
- * 							       is less equal to higherbound.
- * 							   =1: decrease delta a little bit
- * 							       such that the last grid value
- * 							       equals to higherbound.
- * 							   =2: ignore delta. Use lowerbound
- * 							   	   higherbound and npts to create
- * 							   	   the grid.
+ *                                =0: fix delta; last grid value
+ *                                    is less equal to higherbound.
+ *                                =1: decrease delta a little bit
+ *                                    such that the last grid value
+ *                                    equals to higherbound.
+ *                                =2: ignore delta. Use lowerbound
+ *                                       higherbound and npts to create
+ *                                       the grid.
  *
  * Return value: actual interval.
  * 
@@ -70,37 +70,37 @@ int meshsize(double lowerbound, double higherbound, double delta, int flag){
 
 double meshthem(double *res, int npts, double lowerbound, double higherbound, double delta, int flag){
 
-	int NPTS,Cnt;
+    int NPTS,Cnt;
 
-	if (flag==0 || flag==1){
-		NPTS=meshsize(lowerbound,higherbound,delta,flag);
-		if (NPTS>npts){
-			printf("In %s: Array size not big enough ...\n",__func__);
-			return -1.0;
-		}
-	}
+    if (flag==0 || flag==1){
+        NPTS=meshsize(lowerbound,higherbound,delta,flag);
+        if (NPTS>npts){
+            printf("In %s: Array size not big enough ...\n",__func__);
+            return -1.0;
+        }
+    }
 
-	if (flag==0){
-		for (Cnt=0;Cnt<NPTS;Cnt++){
-			res[Cnt]=lowerbound+Cnt*delta;
-		}
-	}
-	else if (flag==1){
-		delta=(higherbound-lowerbound)/(NPTS-1);
-		for (Cnt=0;Cnt<NPTS;Cnt++){
-			res[Cnt]=lowerbound+Cnt*delta;
-		}
-	}
-	else if (flag==2){
-		delta=(higherbound-lowerbound)/(npts-1);
-		for (Cnt=0;Cnt<npts;Cnt++){
-			res[Cnt]=lowerbound+Cnt*delta;
-		}
-	}
-	else{
-		printf("In %s: Flag error ...\n",__func__);
-		return -1;
-	}
+    if (flag==0){
+        for (Cnt=0;Cnt<NPTS;Cnt++){
+            res[Cnt]=lowerbound+Cnt*delta;
+        }
+    }
+    else if (flag==1){
+        delta=(higherbound-lowerbound)/(NPTS-1);
+        for (Cnt=0;Cnt<NPTS;Cnt++){
+            res[Cnt]=lowerbound+Cnt*delta;
+        }
+    }
+    else if (flag==2){
+        delta=(higherbound-lowerbound)/(npts-1);
+        for (Cnt=0;Cnt<npts;Cnt++){
+            res[Cnt]=lowerbound+Cnt*delta;
+        }
+    }
+    else{
+        printf("In %s: Flag error ...\n",__func__);
+        return -1;
+    }
 
-	return delta;
+    return delta;
 }

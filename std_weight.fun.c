@@ -22,13 +22,13 @@
  * Key words: standard deviation, unbiased, weighted
  *
  * Reference:
- * 	   Use SPSS approach for weighted standard deviation:
+ *        Use SPSS approach for weighted standard deviation:
  *     http://www.analyticalgroup.com/download/WEIGHTED_MEAN.pdf
 ***********************************************************/
 
 double std_weight(double *p, double *w, int npts){
 
-	// Method 1.
+    // Method 1.
 //     int    count,N;
 //     double flip,avrx,UP,W;
 // 
@@ -62,29 +62,29 @@ double std_weight(double *p, double *w, int npts){
 //     // Return standard deviation.
 //     return sqrt(UP*N/(N-1)/W);
 
-	// Method 2.
-	double SumW=0,avr=0;
-	for (size_t i=0;i<npts;++i){
-		SumW+=fabs(w[i]);
-		avr+=w[i]*p[i];
-	}
+    // Method 2.
+    double SumW=0,avr=0;
+    for (size_t i=0;i<npts;++i){
+        SumW+=fabs(w[i]);
+        avr+=w[i]*p[i];
+    }
 
-	if (SumW<=0) {
-		printf("In %s; Error: weight sum <= 0 ...\n",__func__ );
-		return 0;
-	}
+    if (SumW<=0) {
+        printf("In %s; Error: weight sum <= 0 ...\n",__func__ );
+        return 0;
+    }
 
-	avr/=SumW;
+    avr/=SumW;
 
-	if (SumW<=1) {
-		printf("In %s; Warning: weight sum <= 1 ...\n",__func__ );
-		return 0;
-	}
-	double Sum=0;
-	for (size_t i=0;i<npts;++i){
-		double diff=(w[i]>0?1:-1)*p[i]-avr;
-		Sum+=fabs(w[i])*diff*diff;
-	}
+    if (SumW<=1) {
+        printf("In %s; Warning: weight sum <= 1 ...\n",__func__ );
+        return 0;
+    }
+    double Sum=0;
+    for (size_t i=0;i<npts;++i){
+        double diff=(w[i]>0?1:-1)*p[i]-avr;
+        Sum+=fabs(w[i])*diff*diff;
+    }
 
-	return sqrt(Sum/(SumW-1));
+    return sqrt(Sum/(SumW-1));
 }

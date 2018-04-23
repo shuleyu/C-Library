@@ -23,21 +23,21 @@
 
 int  mixsize(double *p, int NPTS){
 
-	if (NPTS%3!=0){
-		printf("In %s: Input size should be multiper of 3 ...\n",__func__);
-		return -1;
-	}
+    if (NPTS%3!=0){
+        printf("In %s: Input size should be multiper of 3 ...\n",__func__);
+        return -1;
+    }
 
-	int ans,Cnt;
+    int ans,Cnt;
 
-	ans=1;
+    ans=1;
 
-	for (Cnt=0;Cnt<NPTS/3;++Cnt){
-		if (p[3*Cnt+1]>p[3*Cnt]){
-			ans*=(1+(int)floor((p[3*Cnt+1]-p[3*Cnt]+1e-7)/p[3*Cnt+2]));
-		}
-	}
-	return ans;
+    for (Cnt=0;Cnt<NPTS/3;++Cnt){
+        if (p[3*Cnt+1]>p[3*Cnt]){
+            ans*=(1+(int)floor((p[3*Cnt+1]-p[3*Cnt]+1e-7)/p[3*Cnt+2]));
+        }
+    }
+    return ans;
 }
 
 /************************************************************
@@ -58,50 +58,50 @@ int  mixsize(double *p, int NPTS){
 
 void mixthem(double *p, int NPTS, double **res){
 
-	if (NPTS%3!=0){
-		printf("In %s: Input size should be multiper of 3 ...\n",__func__);
-	}
+    if (NPTS%3!=0){
+        printf("In %s: Input size should be multiper of 3 ...\n",__func__);
+    }
 
-	int    Cnt,Cnt2,Cnt3,Size;
-	double tmpvar,**pp;
+    int    Cnt,Cnt2,Cnt3,Size;
+    double tmpvar,**pp;
 
-	if (NPTS==3){
+    if (NPTS==3){
 
-		Cnt=0;
-		tmpvar=p[0];
-		while (Cnt==0 || tmpvar<p[1]+p[2]/2){
-			res[Cnt][0]=tmpvar;
-			++Cnt;
-			tmpvar+=p[2];
-		}
-		return;
-	}
+        Cnt=0;
+        tmpvar=p[0];
+        while (Cnt==0 || tmpvar<p[1]+p[2]/2){
+            res[Cnt][0]=tmpvar;
+            ++Cnt;
+            tmpvar+=p[2];
+        }
+        return;
+    }
 
-	Size=mixsize(p+3,NPTS-3);
-	pp=(double **)malloc(Size*sizeof(double *));
-	for (Cnt=0;Cnt<Size;Cnt++){
-		pp[Cnt]=(double *)malloc((NPTS/3-1)*sizeof(double));
-	}
+    Size=mixsize(p+3,NPTS-3);
+    pp=(double **)malloc(Size*sizeof(double *));
+    for (Cnt=0;Cnt<Size;Cnt++){
+        pp[Cnt]=(double *)malloc((NPTS/3-1)*sizeof(double));
+    }
 
-	mixthem(p+3,NPTS-3,pp);
+    mixthem(p+3,NPTS-3,pp);
 
-	Cnt=0;
-	tmpvar=p[0];
-	while (Cnt==0 || tmpvar<p[1]+p[2]/2){
-		for (Cnt2=0;Cnt2<Size;Cnt2++){
-			res[Cnt+Cnt2][0]=tmpvar;
-			for (Cnt3=0;Cnt3<NPTS/3-1;Cnt3++){
-				res[Cnt+Cnt2][1+Cnt3]=pp[Cnt2][Cnt3];
-			}
-		}
-		Cnt+=Size;
-		tmpvar+=p[2];
-	}
+    Cnt=0;
+    tmpvar=p[0];
+    while (Cnt==0 || tmpvar<p[1]+p[2]/2){
+        for (Cnt2=0;Cnt2<Size;Cnt2++){
+            res[Cnt+Cnt2][0]=tmpvar;
+            for (Cnt3=0;Cnt3<NPTS/3-1;Cnt3++){
+                res[Cnt+Cnt2][1+Cnt3]=pp[Cnt2][Cnt3];
+            }
+        }
+        Cnt+=Size;
+        tmpvar+=p[2];
+    }
 
-	for (Cnt=0;Cnt<Size;Cnt++){
-		free(pp[Cnt]);
-	}
-	free(pp);
+    for (Cnt=0;Cnt<Size;Cnt++){
+        free(pp[Cnt]);
+    }
+    free(pp);
 
-	return;
+    return;
 }

@@ -28,69 +28,69 @@
 
 void butterworth_lp(double **p, int nptsx, int nptsy, double delta, int order, int passes, double f, double **ans){
 
-	int   Cnt,Cnt2;
-	float *rawdata;
-	rawdata=(float *)malloc(nptsy*sizeof(float));
+    int   Cnt,Cnt2;
+    float *rawdata;
+    rawdata=(float *)malloc(nptsy*sizeof(float));
 
-	for (Cnt=0;Cnt<nptsx;Cnt++){
-		for (Cnt2=0;Cnt2<nptsy;Cnt2++){
-			rawdata[Cnt2]=p[Cnt][Cnt2];
-		}
+    for (Cnt=0;Cnt<nptsx;Cnt++){
+        for (Cnt2=0;Cnt2<nptsy;Cnt2++){
+            rawdata[Cnt2]=p[Cnt][Cnt2];
+        }
 
-		xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_LOWPASS,0.0,f,delta,passes);
+        xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_LOWPASS,0.0,f,delta,passes);
 
-		for (Cnt2=0;Cnt2<nptsy;Cnt2++){
-			ans[Cnt][Cnt2]=rawdata[Cnt2];
-		}
-	}
+        for (Cnt2=0;Cnt2<nptsy;Cnt2++){
+            ans[Cnt][Cnt2]=rawdata[Cnt2];
+        }
+    }
 
-	free(rawdata);
+    free(rawdata);
 
-	return ;
+    return ;
 }
 
 void butterworth_hp(double **p, int nptsx, int nptsy, double delta, int order, int passes, double f, double **ans){
 
-	int   Cnt,Cnt2;
-	float *rawdata;
-	rawdata=(float *)malloc(nptsy*sizeof(float));
+    int   Cnt,Cnt2;
+    float *rawdata;
+    rawdata=(float *)malloc(nptsy*sizeof(float));
 
-	for (Cnt=0;Cnt<nptsx;Cnt++){
-		for (Cnt2=0;Cnt2<nptsy;Cnt2++){
-			rawdata[Cnt2]=p[Cnt][Cnt2];
-		}
+    for (Cnt=0;Cnt<nptsx;Cnt++){
+        for (Cnt2=0;Cnt2<nptsy;Cnt2++){
+            rawdata[Cnt2]=p[Cnt][Cnt2];
+        }
 
-		xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_HIGHPASS,f,0.0,delta,passes);
+        xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_HIGHPASS,f,0.0,delta,passes);
 
-		for (Cnt2=0;Cnt2<nptsy;Cnt2++){
-			ans[Cnt][Cnt2]=rawdata[Cnt2];
-		}
-	}
+        for (Cnt2=0;Cnt2<nptsy;Cnt2++){
+            ans[Cnt][Cnt2]=rawdata[Cnt2];
+        }
+    }
 
-	free(rawdata);
+    free(rawdata);
 
-	return ;
+    return ;
 }
 
 void butterworth_bp(double **p, int nptsx, int nptsy, double delta, int order, int passes, double f, double f2, double **ans){
 
-	int   Cnt,Cnt2;
-	float *rawdata;
-	rawdata=(float *)malloc(nptsy*sizeof(float));
+    int   Cnt,Cnt2;
+    float *rawdata;
+    rawdata=(float *)malloc(nptsy*sizeof(float));
 
-	for (Cnt=0;Cnt<nptsx;Cnt++){
-		for (Cnt2=0;Cnt2<nptsy;Cnt2++){
-			rawdata[Cnt2]=p[Cnt][Cnt2];
-		}
+    for (Cnt=0;Cnt<nptsx;Cnt++){
+        for (Cnt2=0;Cnt2<nptsy;Cnt2++){
+            rawdata[Cnt2]=p[Cnt][Cnt2];
+        }
 
-		xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_BANDPASS,f,f2,delta,passes);
+        xapiir(rawdata,nptsy,SAC_BUTTERWORTH,0.0,0.0,order,SAC_BANDPASS,f,f2,delta,passes);
 
-		for (Cnt2=0;Cnt2<nptsy;Cnt2++){
-			ans[Cnt][Cnt2]=rawdata[Cnt2];
-		}
-	}
+        for (Cnt2=0;Cnt2<nptsy;Cnt2++){
+            ans[Cnt][Cnt2]=rawdata[Cnt2];
+        }
+    }
 
-	free(rawdata);
+    free(rawdata);
 
-	return ;
+    return ;
 }

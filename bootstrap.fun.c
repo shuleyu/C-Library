@@ -44,30 +44,30 @@ void bootstrap(double **p, int nptsx, int nptsy, int BootNum, double *avr, doubl
     // Stack and get weighted mean for each resamples.
     for (count=0;count<BootNum;count++){
 
-		for (count2=0;count2<nptsy;count2++)
-			Boot[count][count2]=0;
+        for (count2=0;count2<nptsy;count2++)
+            Boot[count][count2]=0;
 
-		double SumW=0;
+        double SumW=0;
         for (count2=0;count2<nptsx;count2++){
-			int Choose=choose[count*nptsx+count2];
-			double Weight=(flag_weight==1?w[Choose]:1);
-			SumW+=fabs(Weight);
-			for (count3=0;count3<nptsy;count3++){
-				Boot[count][count3]+=Weight*p[Choose][count3];
-			}
+            int Choose=choose[count*nptsx+count2];
+            double Weight=(flag_weight==1?w[Choose]:1);
+            SumW+=fabs(Weight);
+            for (count3=0;count3<nptsy;count3++){
+                Boot[count][count3]+=Weight*p[Choose][count3];
+            }
         }
 
         for (count2=0;count2<nptsy;count2++){
-			Boot[count][count2]/=SumW;
-		}
+            Boot[count][count2]/=SumW;
+        }
     }
 
-	// Estimate the mean of resamples.
-	shift_stack(Boot,BootNum,nptsy,0,shift,0,weight,avr,sigma);
+    // Estimate the mean of resamples.
+    shift_stack(Boot,BootNum,nptsy,0,shift,0,weight,avr,sigma);
 
 
     // Estimate the standard error of resamples.
-	double *tmparray;
+    double *tmparray;
     tmparray=(double *)malloc(BootNum*sizeof(double));
 
     for (count=0;count<nptsy;count++){

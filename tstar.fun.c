@@ -29,28 +29,28 @@ void tstar(double delta, int npts, double ts, double *ans){
         return;
     }
 
-	int Cnt;
-	if (ts<=0){
-		for (Cnt=0;Cnt<npts;++Cnt){
-			ans[Cnt]=0;
-		}
-		ans[(int)(1/delta)]=1;
-		return;
-	}
+    int Cnt;
+    if (ts<=0){
+        for (Cnt=0;Cnt<npts;++Cnt){
+            ans[Cnt]=0;
+        }
+        ans[(int)(1/delta)]=1;
+        return;
+    }
 
-	int flag;
-	flag=0;
-	if (npts%2==1){
-		npts++;
-		flag=1;
-	}
+    int flag;
+    flag=0;
+    if (npts%2==1){
+        npts++;
+        flag=1;
+    }
 
-	double c,f,df;
+    double c,f,df;
     fftw_complex *in;
     fftw_plan    p1;
-	double *out;
+    double *out;
 
-	df=1.0/delta/npts;
+    df=1.0/delta/npts;
     out=(double *)malloc(npts*sizeof(double));
     in=(fftw_complex *)fftw_malloc((npts/2+1)*sizeof(fftw_complex));
 
@@ -58,30 +58,30 @@ void tstar(double delta, int npts, double ts, double *ans){
     // Define ifft transform plan.
     p1=fftw_plan_dft_c2r_1d(npts,in,out,FFTW_MEASURE);
 
-	
-	// Put attenuation scheme into the ifft plan.
-	in[0][0]=1.0;
-	in[0][1]=0.0;
-	for (Cnt=1;Cnt<npts/2+1;++Cnt){
-		f=df*Cnt;
-		c=2*f*ts*(log(f)-M_PI*8/ts+M_PI*0.65);
-		in[Cnt][0]=exp(-M_PI*f*ts)*cos(c);
-		in[Cnt][1]=exp(-M_PI*f*ts)*sin(c);
-	}
+    
+    // Put attenuation scheme into the ifft plan.
+    in[0][0]=1.0;
+    in[0][1]=0.0;
+    for (Cnt=1;Cnt<npts/2+1;++Cnt){
+        f=df*Cnt;
+        c=2*f*ts*(log(f)-M_PI*8/ts+M_PI*0.65);
+        in[Cnt][0]=exp(-M_PI*f*ts)*cos(c);
+        in[Cnt][1]=exp(-M_PI*f*ts)*sin(c);
+    }
 
-	// Run ifft.
-	fftw_execute(p1);
+    // Run ifft.
+    fftw_execute(p1);
 
-	if (flag==1){
-		npts--;
-	}
+    if (flag==1){
+        npts--;
+    }
 
-	// Output.
-	for (Cnt=0;Cnt<npts;++Cnt){
-		ans[Cnt]=exp(M_PI*ts)*out[Cnt];
-	}
+    // Output.
+    for (Cnt=0;Cnt<npts;++Cnt){
+        ans[Cnt]=exp(M_PI*ts)*out[Cnt];
+    }
 
-	// Normalize 
+    // Normalize 
     free(out);
     fftw_free(in);
     fftw_destroy_plan(p1);

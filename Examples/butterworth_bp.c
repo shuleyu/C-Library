@@ -9,16 +9,16 @@ int main(){
     FILE   *fp;
     double *p;
 
-	npts=filenr("data/butterworth_infile");
+    npts=filenr("data/butterworth_infile");
     p=(double *)malloc(npts*sizeof(double));
 
     fp=fopen("data/butterworth_infile","r");
-	for (count=0;count<npts;count++){
-    	fscanf(fp,"%lf",&p[count]);
+    for (count=0;count<npts;count++){
+        fscanf(fp,"%lf",&p[count]);
     }
     fclose(fp);
 
-	butterworth_bp(&p,1,npts,0.01,2,2,0.1,0.4,&p);
+    butterworth_bp(&p,1,npts,0.01,2,2,0.1,0.4,&p);
 
     // Output result.
     fp=fopen("data/butterworth_bp_C","w");

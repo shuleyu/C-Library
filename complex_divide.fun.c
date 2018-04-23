@@ -26,11 +26,11 @@ void complex_divide(double a, double b, double c,double d,double *e, double *f){
 
     if (c==0 && d==0){
         printf("In %s: Divided by zero !\n",__func__);
-		(*e)=0.0/0.0;
-		(*f)=0.0/0.0;
+        (*e)=0.0/0.0;
+        (*f)=0.0/0.0;
         return;
     }
-	
+    
     (*e)=(a*c+b*d)/(c*c+d*d);
     (*f)=(b*c-a*d)/(c*c+d*d);
     return;

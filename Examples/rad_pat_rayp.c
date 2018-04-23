@@ -10,8 +10,8 @@ int main(){
     dip=37;
     rake=-39;
     evdp=600;
-	rayp=13.976281;
-	az=78.851233;
+    rayp=13.976281;
+    az=78.851233;
 
     // Use function.
     printf("%.10lf\n",rad_pat_rayp(strike,dip,rake,az,evdp,rayp,2));

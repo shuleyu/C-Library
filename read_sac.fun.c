@@ -22,7 +22,7 @@
  *
  * (for read_sac_fixdel:)
  * int    *nptsy        ----  Adjusted data length to the cut time period and original 
- * 							  sampling rate.
+ *                               sampling rate.
  *
  * double *CutAround    ----  Cut around this time value. e.g. a phase arrival ( sec. )
  * double Cut           ----  Begin time in result relative to CutAround. ( sec. )
@@ -32,11 +32,11 @@
  *                            Data length (in sec.) is (nptsy-1)*delta.
  * (for read_sac_fixdel:)
  * double *delta        ----  This fixdel is a little strange. It require all SAC file has
- * 							  the same sampling rate (usually this is used on synthetics).
- * 							  The only difference from read_sac is that no interpolation
- * 							  happens in this one. Input delta should approximate the one
- * 							  in SAC files to ensure the data length read in is correct,
- * 							  the output value will be changed to the real SAC sampling rate.
+ *                               the same sampling rate (usually this is used on synthetics).
+ *                               The only difference from read_sac is that no interpolation
+ *                               happens in this one. Input delta should approximate the one
+ *                               in SAC files to ensure the data length read in is correct,
+ *                               the output value will be changed to the real SAC sampling rate.
  *
  * double f1            ----  Filter left corner freq 1.
  *                            Ignored when flag_filter == 1
@@ -50,8 +50,8 @@
  *                            2 -- Butterworth band pass.
  *                            3 -- Butterworth high pass.
  * int    flag_retrend  ----  After the cut, whether apply a retrend operation.
- * 							  0 -- No retrend after cut.
- * 							  1 -- Retrend after cut.
+ *                               0 -- No retrend after cut.
+ *                               1 -- Retrend after cut.
  * double taperwidth    ----  After the cut, apply a taper before filter.
  * char   **filelist    ----  Sac file list ( use absolute dir with file basename )
  * int    *bad          ----  Indicate this data has error.
@@ -81,9 +81,9 @@ int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,doub
     for (count=0;count<nptsx;count++){
 
         CutTime=Cut+CutAround[count];
-		for (count2=0;count2<nptsy;count2++){
-			newtime[count2]=CutTime+delta*count2;
-		}
+        for (count2=0;count2<nptsy;count2++){
+            newtime[count2]=CutTime+delta*count2;
+        }
 
         // Load sac file.
         // Evenly sampling, use rsac1.
@@ -107,16 +107,16 @@ int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,doub
             continue;
         }
 
-		// Check the coverage of cut window.
-		if ( CutTime<rawtime[0] || rawtime[rawnpts-1]<CutTime+dlength ){
+        // Check the coverage of cut window.
+        if ( CutTime<rawtime[0] || rawtime[rawnpts-1]<CutTime+dlength ){
             printf("In %s: Cut window not suitable for file %s ...\n",__func__,filelist[count]);
             bad[count]=1;
             continue;
-		}
+        }
 
         // Check amplitude within the cut window, to see if it's a bad record.
         win_rawnpts=0;
-		win_rawbegin=0;
+        win_rawbegin=0;
         for (count2=0;count2<rawnpts;count2++){
             if (rawtime[count2] <= CutTime){
                 win_rawbegin=count2;
@@ -133,30 +133,30 @@ int read_sac(double **data,int nptsx,int nptsy,double *CutAround,double Cut,doub
         }
 
         // Interpolate / Decimate then cut data.
-		wiginterp_f(rawtime,rawdata,rawnpts,newtime,data[count],nptsy,interp_flag);
-// 		if (delta>rawdel+0.00001){
-// 			printf("In %s: Aliasing warning: %s, %.2e Hz -> %.2e Hz \n",__func__,filelist[count],rawdel,delta);
-// 		}
+        wiginterp_f(rawtime,rawdata,rawnpts,newtime,data[count],nptsy,interp_flag);
+//         if (delta>rawdel+0.00001){
+//             printf("In %s: Aliasing warning: %s, %.2e Hz -> %.2e Hz \n",__func__,filelist[count],rawdel,delta);
+//         }
 
 
         // Retrend.
-		if (flag_retrend!=0){
-			retrendd(CutTime,data[count],nptsy,delta);
-		}
+        if (flag_retrend!=0){
+            retrendd(CutTime,data[count],nptsy,delta);
+        }
 
-		// Taper
-		taperd(data[count],nptsy,taperwidth);
+        // Taper
+        taperd(data[count],nptsy,taperwidth);
 
         // Filter.
         if (flag_filter==1){
-			butterworth_lp(&data[count],1,nptsy,delta,order,passes,f2,&data[count]);
-		}
-		if (flag_filter==2){
-			butterworth_bp(&data[count],1,nptsy,delta,order,passes,f1,f2,&data[count]);
-		}
+            butterworth_lp(&data[count],1,nptsy,delta,order,passes,f2,&data[count]);
+        }
+        if (flag_filter==2){
+            butterworth_bp(&data[count],1,nptsy,delta,order,passes,f1,f2,&data[count]);
+        }
         if (flag_filter==3){
-			butterworth_hp(&data[count],1,nptsy,delta,order,passes,f1,&data[count]);
-		}
+            butterworth_hp(&data[count],1,nptsy,delta,order,passes,f1,&data[count]);
+        }
 
         bad[count]=0;
         fileN++;
@@ -177,7 +177,7 @@ int read_sac_fixdel(double **data,int nptsx,int *nptsy,double *CutAround,double 
     double CutTime,dlength,del_double;
 
     maxl=DMAXL;
-	del_flag=0;
+    del_flag=0;
     dlength=((*nptsy)-1)*(*delta);
 
     // Malloc auxilliary space.
@@ -202,31 +202,31 @@ int read_sac_fixdel(double **data,int nptsx,int *nptsy,double *CutAround,double 
         }
 
 
-		// Check whether the data can be successfully load into the malloced space.
-		if (rawdel < (*delta)) {
+        // Check whether the data can be successfully load into the malloced space.
+        if (rawdel < (*delta)) {
             printf("In %s: File %s has higher sampling rate than target...\n",__func__,filelist[count]);
             bad[count]=1;
             continue;
-		}
+        }
 
 
-		// Check whether the sampling rate of different traces various too much.
-		if ((*delta)-rawdel>0.001){
+        // Check whether the sampling rate of different traces various too much.
+        if ((*delta)-rawdel>0.001){
             printf("In %s: File %s has a big difference in sampling rate with target...\n",__func__,filelist[count]);
             bad[count]=1;
             continue;
-		}
+        }
 
 
-		// Check the coverage of cut window.
-		if ( CutTime<rawbeg || rawbeg+(rawnpts-1)*rawdel<CutTime+dlength ){
+        // Check the coverage of cut window.
+        if ( CutTime<rawbeg || rawbeg+(rawnpts-1)*rawdel<CutTime+dlength ){
             printf("In %s: Cut window not suitable for file %s ...\n",__func__,filelist[count]);
             bad[count]=1;
             continue;
-		}
+        }
 
         // Check amplitude within the cut window, to see if it's a bad record.
-		win_rawbegin=(int)ceil((CutTime-rawbeg)/rawdel);
+        win_rawbegin=(int)ceil((CutTime-rawbeg)/rawdel);
         win_rawnpts=(int)ceil(dlength/rawdel);
 
         if ( amplitude(rawdata+win_rawbegin,win_rawnpts) < 1e-20 ){
@@ -236,50 +236,50 @@ int read_sac_fixdel(double **data,int nptsx,int *nptsy,double *CutAround,double 
         }
 
 
-		// Check conformity of sampling rate.
-		if (del_flag==0){ // If we haven't decide the new sampling rate.
-			del_double=rawdel;
-			(*nptsy)=1+(int)ceil(dlength/del_double);
-			del_flag=1;
-		}
-		else { // If we have decided the new sampling rate, constrain the readin sampling rate.
-			if (fabs(del_double-rawdel)>0.0005){
-				printf("In %s: file %s has different sampling rate from previous file(s)... \n",__func__,filelist[count]);
-				bad[count]=1;
-				continue;
-			}
-		}
+        // Check conformity of sampling rate.
+        if (del_flag==0){ // If we haven't decide the new sampling rate.
+            del_double=rawdel;
+            (*nptsy)=1+(int)ceil(dlength/del_double);
+            del_flag=1;
+        }
+        else { // If we have decided the new sampling rate, constrain the readin sampling rate.
+            if (fabs(del_double-rawdel)>0.0005){
+                printf("In %s: file %s has different sampling rate from previous file(s)... \n",__func__,filelist[count]);
+                bad[count]=1;
+                continue;
+            }
+        }
 
 
-		// Cut data.
-		for (count2=0;count2<(*nptsy);count2++){
-			data[count][count2]=rawdata[win_rawbegin+count2];
-		}
+        // Cut data.
+        for (count2=0;count2<(*nptsy);count2++){
+            data[count][count2]=rawdata[win_rawbegin+count2];
+        }
 
         // Retrend.
-		if (flag_retrend!=0){
-			retrendd(CutTime,data[count],(*nptsy),del_double);
-		}
+        if (flag_retrend!=0){
+            retrendd(CutTime,data[count],(*nptsy),del_double);
+        }
 
         // Filter.
-		if (flag_filter!=0){
+        if (flag_filter!=0){
             taperd(data[count],(*nptsy),taperwidth);
-		}
+        }
         if (flag_filter==1){
-			butterworth_lp(&data[count],1,(*nptsy),del_double,order,passes,f2,&data[count]);
-		}
-		if (flag_filter==2){
-			butterworth_bp(&data[count],1,(*nptsy),del_double,order,passes,f1,f2,&data[count]);
-		}
+            butterworth_lp(&data[count],1,(*nptsy),del_double,order,passes,f2,&data[count]);
+        }
+        if (flag_filter==2){
+            butterworth_bp(&data[count],1,(*nptsy),del_double,order,passes,f1,f2,&data[count]);
+        }
         if (flag_filter==3){
-			butterworth_hp(&data[count],1,(*nptsy),del_double,order,passes,f1,&data[count]);
-		}
+            butterworth_hp(&data[count],1,(*nptsy),del_double,order,passes,f1,&data[count]);
+        }
 
         bad[count]=0;
         fileN++;
 
     } // End of reading from filelist.
-	(*delta)=del_double;
+    (*delta)=del_double;
 
     free(rawdata);
 

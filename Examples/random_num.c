@@ -35,28 +35,28 @@
 
 // Example program 2. Calculate \pi.
 int main(){
-	
-	int    npts,count,N;
-	double *p;
+    
+    int    npts,count,N;
+    double *p;
 
-	npts=10000000;
+    npts=10000000;
     p=(double *)malloc(2*npts*sizeof(double));
-	random_num(p,2*npts);
+    random_num(p,2*npts);
 
-	// Reset range to -1 to 1.
-	for (count=0;count<2*npts;count++){
-		p[count]=p[count]*2-1;
-	}
+    // Reset range to -1 to 1.
+    for (count=0;count<2*npts;count++){
+        p[count]=p[count]*2-1;
+    }
 
-	// Count points located within unit circle.
-	N=0;
-	for (count=0;count<npts;count++){
-		if (pow(p[count],2)+pow(p[count+npts],2)<1){
-			N++;
-		}
-	}
+    // Count points located within unit circle.
+    N=0;
+    for (count=0;count<npts;count++){
+        if (pow(p[count],2)+pow(p[count+npts],2)<1){
+            N++;
+        }
+    }
 
-	printf("PI is: %.5lf\n",(1.0*N)/npts*4);
-	
-	return 0;
+    printf("PI is: %.5lf\n",(1.0*N)/npts*4);
+    
+    return 0;
 }

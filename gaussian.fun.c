@@ -31,9 +31,9 @@
 ***********************************************************/
 
 double gaussian(double x,double sigma,double mu){
-	if (sigma<0){
-		return 1;
-	}
+    if (sigma<0){
+        return 1;
+    }
     if (sigma==0){
         if (x==0){
             return 1;
@@ -49,20 +49,20 @@ double gaussian(double x,double sigma,double mu){
 
 void gaussianfun(double *p,int npts,double delta,double sigma){
 
-	int count;
+    int count;
 
     p[npts/2]=gaussian(0,sigma,0);
 
-	if (sigma<0){
-		for (count=0;count<npts;count++){
-			p[count]=0;
-		}
-		return;
-	}
+    if (sigma<0){
+        for (count=0;count<npts;count++){
+            p[count]=0;
+        }
+        return;
+    }
 
     for (count=0;count<npts/2;count++){
         p[count]=gaussian(-(npts/2-count)*delta,sigma,0);
         p[npts-1-count]=p[count];
     }
-	return;
+    return;
 }
