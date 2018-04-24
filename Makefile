@@ -9,7 +9,7 @@ LIBDIR   := -L. -L/opt/local/lib -L$(SACHOME)/lib -L$(SACHOME2)/lib
 LIBS     := -lASU_tools -lsac -lsacio -lgsl -lgslcblas -lfftw3 -lm
 
 # function files
-SRCFILES := $(wildcard *.fun.c)
+SRCFILES := $(wildcard *.c)
 DEPFILES := $(patsubst %.c, %.d, $(SRCFILES))
 OBJS     := $(patsubst %.c, %.o, $(SRCFILES))
 
@@ -29,13 +29,16 @@ examples: libASU_tools.a $(EGEXECS)
 -include $(DEPFILES) $(EGDEPS)
 
 libASU_tools.a: $(OBJS)
-	ar cr libASU_tools.a $(OBJS)
+	@echo "Updating $@ ..."
+	@ar cr libASU_tools.a $(OBJS)
 
 %.o: %.c
-	$(COMP) -MMD -MP -c $< -o $@ $(INCDIR)
+	@echo "Updating $@ ..."
+	@$(COMP) -MD -MP -c $< -o $@ $(INCDIR)
 
-$(EGDIR)/%.out: $(EGDIR)/%.c
-	$(COMP) -MMD -MP $< -o $@ $(INCDIR) $(LIBDIR) $(LIBS)
+%.out: %.c
+	@echo "Updating $@ ..."
+	@$(COMP) -MD -MP $< -o $@ $(INCDIR) $(LIBDIR) $(LIBS)
 
 clean:
 	rm -f *.d *.o libASU_tools.a $(EGDIR)/*.d $(EGDIR)/*.out
