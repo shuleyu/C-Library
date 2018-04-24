@@ -36,7 +36,7 @@ libASU_tools.a: $(OBJS)
 	@echo "Updating $@ ..."
 	@$(COMP) -MD -MP -c $< -o $@ $(INCDIR)
 
-%.out: %.c
+%.out: %.c libASU_tools.a
 	@echo "Updating $@ ..."
 	@$(COMP) -MD -MP $< -o $@ $(INCDIR) $(LIBDIR) $(LIBS)
 

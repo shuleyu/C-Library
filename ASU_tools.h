@@ -1,9 +1,9 @@
 
 /************************************************************
  * This file declares C functions of libASU_tools.a
- * I'm migrating these functions to a C++ library.
- * Most of these functions are covered either in CPP standard
- * library or in my C++ library.
+ * I've migrated these functions to a C++ library.
+ * There should be no new functions in this library. Write a
+ * function template instead in the C++ library.
  *
  * Shule Yu
 ************************************************************/
