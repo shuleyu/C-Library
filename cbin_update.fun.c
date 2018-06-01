@@ -24,7 +24,7 @@
 
 void cbin_update(double *plon, double *plat, int N, double *blon, double *blat, double *radius, int M, int **index){
 
-    int    count,count2,count3;
+    int count,count2,count3;
 
     // Judge each trace.
     for (count=0;count<N;count++){

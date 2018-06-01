@@ -3,6 +3,7 @@
 #include<math.h>
 #include<time.h>
 #include<unistd.h>
+#include<sys/timeb.h>
 #include<ASU_tools.h>
 
 // 3 functions
@@ -45,7 +46,9 @@
 
 void random_num(double *p,int npts){
 
-    srand(time(NULL));
+    struct timeb tp;
+    ftime(&tp);
+    srand(tp.time+tp.millitm);
 
     long x;
     unsigned long num_bins,num_rand,bin_size,defect;
@@ -64,7 +67,7 @@ void random_num(double *p,int npts){
 
     normalized(p,npts);
 
-    sleep(1);
+    usleep(1000);
     return;
 }
 
@@ -81,12 +84,14 @@ void random_int(int min, int max,int *p,int npts) {
         for (count=0;count<npts;count++){
             p[count]=min;
         }
-        sleep(1);
         return;
     }
 
     max-=1;
-    srand(time(NULL));
+
+    struct timeb tp;
+    ftime(&tp);
+    srand(tp.time+tp.millitm);
 
     long x;
     unsigned long num_bins,num_rand,bin_size,defect;
@@ -101,7 +106,7 @@ void random_int(int min, int max,int *p,int npts) {
         p[count]=1+(int)x/bin_size;
     }
 
-    sleep(1);
+    usleep(1000);
     return;
 }
 

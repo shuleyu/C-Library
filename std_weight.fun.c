@@ -80,6 +80,7 @@ double std_weight(double *p, double *w, int npts){
         printf("In %s; Warning: weight sum <= 1 ...\n",__func__ );
         return 0;
     }
+
     double Sum=0;
     for (size_t i=0;i<npts;++i){
         double diff=(w[i]>0?1:-1)*p[i]-avr;

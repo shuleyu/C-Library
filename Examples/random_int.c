@@ -7,10 +7,10 @@ int main(){
     int  count,count2,min,max,npts,*p,loop;
     FILE *fpout;
 
-    loop=1;
+    loop=5;
     min=1;
-    max=1;
-    npts=1000;
+    max=10;
+    npts=10;
 
     p=(int *)malloc(npts*sizeof(int));
 
